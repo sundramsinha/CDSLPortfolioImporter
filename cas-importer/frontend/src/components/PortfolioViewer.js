@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useMemo, useState } from "react";
 
-function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dematTransactions = [], mode = "all" }) {
+function PortfolioViewer({
+  mutualFundHoldings,
+  dematHoldings,
+  transactions,
+  dematTransactions = [],
+  mode = "all"
+}) {
+  const [holdingsSearch, setHoldingsSearch] = useState("");
+  const normalizedHoldingsSearch = holdingsSearch.trim().toLowerCase();
   const hasMutual = mutualFundHoldings.length > 0;
   const hasDemat = dematHoldings.length > 0;
   const hasTransactions = transactions.length > 0;
@@ -24,22 +32,27 @@ function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dema
   const showTransactions = mode === "all" || mode === "transactions";
   const mutualValue = mutualFundHoldings.reduce((sum, row) => sum + (row.value || 0), 0);
   const dematValue = dematHoldings.reduce((sum, row) => sum + (row.value || 0), 0);
-  const amcDistribution = mutualFundHoldings
-    .reduce((acc, row) => {
-      const amc = row.amc || "Unknown AMC";
-      if (!acc[amc]) {
-        acc[amc] = { amc, schemeCount: 0, totalValue: 0 };
-      }
-      acc[amc].schemeCount += 1;
-      acc[amc].totalValue += row.value || 0;
-      return acc;
-    }, {})
-    .valueOf();
-  const amcDistributionRows = Object.values(amcDistribution).sort((a, b) => b.totalValue - a.totalValue);
-  const redemptionCount = transactions.filter((txn) =>
-    /redemption|withdraw|switch out/i.test(txn.description || "")
-  ).length;
-  const inflowCount = transactions.length - redemptionCount;
+  const filteredMutualFundHoldings = useMemo(() => {
+    if (!normalizedHoldingsSearch) return mutualFundHoldings;
+    return mutualFundHoldings.filter((row) =>
+      [
+        row?.amc,
+        row?.scheme_name,
+        row?.folio_number,
+        row?.isin
+      ]
+        .map((value) => String(value || "").toLowerCase())
+        .some((value) => value.includes(normalizedHoldingsSearch))
+    );
+  }, [mutualFundHoldings, normalizedHoldingsSearch]);
+  const filteredDematHoldings = useMemo(() => {
+    if (!normalizedHoldingsSearch) return dematHoldings;
+    return dematHoldings.filter((row) =>
+      [row?.isin, row?.security_name, row?.amc]
+        .map((value) => String(value || "").toLowerCase())
+        .some((value) => value.includes(normalizedHoldingsSearch))
+    );
+  }, [dematHoldings, normalizedHoldingsSearch]);
 
   if (!hasMutual && !hasDemat && !hasTransactions && !hasDematTransactions) {
     return <p className="empty-state">No holdings parsed yet.</p>;
@@ -57,51 +70,29 @@ function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dema
             <span>Demat Book Value</span>
             <strong>{formatCurrency(dematValue)}</strong>
           </article>
-          <article>
-            <span>Inflow-like Transactions</span>
-            <strong>{inflowCount}</strong>
-          </article>
-          <article>
-            <span>Outflow/Redemption Transactions</span>
-            <strong>{redemptionCount}</strong>
-          </article>
         </section>
       ) : null}
 
-      {showHoldings && hasMutual ? (
+      {showHoldings ? (
         <section className="data-section">
-          <h3>AMC Distribution ({amcDistributionRows.length})</h3>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>AMC</th>
-                  <th>Scheme Count</th>
-                  <th>Total Value</th>
-                  <th>Allocation</th>
-                </tr>
-              </thead>
-              <tbody>
-                {amcDistributionRows.map((row) => {
-                  const allocation = mutualValue > 0 ? (row.totalValue / mutualValue) * 100 : 0;
-                  return (
-                    <tr key={row.amc}>
-                      <td>{row.amc}</td>
-                      <td>{row.schemeCount}</td>
-                      <td>{formatCurrency(row.totalValue)}</td>
-                      <td>{formatPercent(allocation)}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <h3>Holdings Search</h3>
+          <div className="upload-inline-row">
+            <input
+              type="text"
+              value={holdingsSearch}
+              onChange={(event) => setHoldingsSearch(event.target.value)}
+              placeholder="Search by ISIN, security, AMC, scheme, or folio"
+            />
           </div>
         </section>
       ) : null}
 
       {showHoldings && hasMutual ? (
         <section className="data-section">
-          <h3>Mutual Fund Holdings ({mutualFundHoldings.length})</h3>
+          <h3>
+            Mutual Fund Holdings ({filteredMutualFundHoldings.length}
+            {normalizedHoldingsSearch ? ` / ${mutualFundHoldings.length}` : ""})
+          </h3>
           <div className="table-wrap">
             <table>
               <thead>
@@ -115,7 +106,7 @@ function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dema
                 </tr>
               </thead>
               <tbody>
-                {mutualFundHoldings.map((row, index) => (
+                {filteredMutualFundHoldings.map((row, index) => (
                   <tr key={`${row.folio_number}-${row.scheme_name}-${index}`}>
                     <td>{row.amc || "-"}</td>
                     <td>{row.scheme_name || "-"}</td>
@@ -128,12 +119,18 @@ function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dema
               </tbody>
             </table>
           </div>
+          {normalizedHoldingsSearch && !filteredMutualFundHoldings.length ? (
+            <p className="empty-state">No mutual fund holdings match this search.</p>
+          ) : null}
         </section>
       ) : null}
 
       {showHoldings && hasDemat ? (
         <section className="data-section">
-          <h3>Demat Stock Holdings ({dematHoldings.length})</h3>
+          <h3>
+            Demat Stock Holdings ({filteredDematHoldings.length}
+            {normalizedHoldingsSearch ? ` / ${dematHoldings.length}` : ""})
+          </h3>
           <div className="table-wrap">
             <table>
               <thead>
@@ -146,7 +143,7 @@ function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dema
                 </tr>
               </thead>
               <tbody>
-                {dematHoldings.map((row, index) => (
+                {filteredDematHoldings.map((row, index) => (
                   <tr key={`${row.isin}-${index}`}>
                     <td>{row.isin || "-"}</td>
                     <td>{row.security_name || "-"}</td>
@@ -158,6 +155,9 @@ function PortfolioViewer({ mutualFundHoldings, dematHoldings, transactions, dema
               </tbody>
             </table>
           </div>
+          {normalizedHoldingsSearch && !filteredDematHoldings.length ? (
+            <p className="empty-state">No demat holdings match this search.</p>
+          ) : null}
         </section>
       ) : null}
 
@@ -259,11 +259,6 @@ function formatCurrency(value) {
     currency: "INR",
     maximumFractionDigits: 2
   });
-}
-
-function formatPercent(value) {
-  if (typeof value !== "number") return "-";
-  return `${value.toFixed(2)}%`;
 }
 
 export default PortfolioViewer;

@@ -4,12 +4,137 @@ import HighchartsReact from "highcharts-react-official";
 
 function DashboardSummary({ summary, mutualFundHoldings, dematHoldings, transactions, variant = "full" }) {
   const [showYearlyTable, setShowYearlyTable] = useState(false);
+  const [selectedInvestorIndex, setSelectedInvestorIndex] = useState(0);
+  const [openSummaryCategoryKey, setOpenSummaryCategoryKey] = useState(null);
   const mf = summary?.totalMutualFundValue || 0;
   const demat = summary?.totalDematValue || 0;
   const total = summary?.totalPortfolioValue || 0;
-  const yearlyValuation = Array.isArray(summary?.yearlyValuation) ? summary.yearlyValuation : [];
   const mfPct = summary?.allocation?.mutualFundPercentage ?? 0;
   const dematPct = summary?.allocation?.dematPercentage ?? 0;
+  const parsedAssetClassBreakup = summary?.assetClassBreakup || null;
+  const parsedAssetClassRows = Array.isArray(parsedAssetClassBreakup?.rows)
+    ? parsedAssetClassBreakup.rows.filter((row) => typeof row?.value === "number")
+    : [];
+  const hasParsedAssetClassBreakup = parsedAssetClassRows.length > 0;
+  const effectiveAssetRows = hasParsedAssetClassBreakup
+    ? parsedAssetClassRows
+    : [
+      { key: "mutualFundFolios", label: "Mutual Fund Folios", value: mf, percentage: mfPct },
+      { key: "equityDemat", label: "Equity / Demat", value: demat, percentage: dematPct }
+    ];
+  const sortedEffectiveAssetRows = [...effectiveAssetRows].sort(
+    (a, b) => (Number(b?.value) || 0) - (Number(a?.value) || 0)
+  );
+  const effectiveAssetTotal =
+    hasParsedAssetClassBreakup && typeof parsedAssetClassBreakup?.totalPortfolioValue === "number"
+      ? parsedAssetClassBreakup.totalPortfolioValue
+      : total;
+  const statementSummaryValues = summary?.statementSummary?.values || null;
+  const statementSummaryEntries = Array.isArray(summary?.statementSummary?.entries)
+    ? summary.statementSummary.entries
+    : [];
+  const consolidatedPortfolioSummary = summary?.consolidatedPortfolioSummary || null;
+  const consolidatedRows = Array.isArray(consolidatedPortfolioSummary?.rows)
+    ? [...consolidatedPortfolioSummary.rows].sort((a, b) => (Number(b?.value) || 0) - (Number(a?.value) || 0))
+    : [];
+  const statementTotal =
+    typeof statementSummaryValues?.totalPortfolioValue === "number"
+      ? statementSummaryValues.totalPortfolioValue
+      : null;
+  const displayTotalValue =
+    typeof effectiveAssetTotal === "number" && effectiveAssetTotal > 0
+      ? effectiveAssetTotal
+      : typeof statementTotal === "number" && statementTotal > 0
+        ? statementTotal
+        : total;
+  const statementBreakupRows = [
+    {
+      key: "cdslDematAccounts",
+      label: "CDSL Demat Accounts",
+      value: statementSummaryValues?.cdslDematAccounts ?? null
+    },
+    {
+      key: "nsdlDematAccounts",
+      label: "NSDL Demat Accounts",
+      value: statementSummaryValues?.nsdlDematAccounts ?? null
+    },
+    {
+      key: "mutualFundFolios",
+      label: "Mutual Fund Folios",
+      value: statementSummaryValues?.mutualFundFolios ?? null
+    }
+  ];
+  const hasStatementBreakupData = statementBreakupRows.some((row) => typeof row.value === "number");
+  const sortedStatementEntries = [...statementSummaryEntries]
+    .map((entry) => {
+      const cdsl = Number(entry?.values?.cdslDematAccounts) || 0;
+      const nsdl = Number(entry?.values?.nsdlDematAccounts) || 0;
+      const mfFolios = Number(entry?.values?.mutualFundFolios) || 0;
+      return { ...entry, rowTotal: cdsl + nsdl + mfFolios };
+    })
+    .sort((a, b) => (b.rowTotal || 0) - (a.rowTotal || 0));
+  const investorSummaryViews = sortedStatementEntries.length
+    ? sortedStatementEntries.map((entry) => ({
+      holderName: entry?.holderName || "Primary Holder",
+      values: {
+        cdslDematAccounts: Number(entry?.values?.cdslDematAccounts) || 0,
+        nsdlDematAccounts: Number(entry?.values?.nsdlDematAccounts) || 0,
+        mutualFundFolios: Number(entry?.values?.mutualFundFolios) || 0
+      }
+    }))
+    : hasStatementBreakupData
+      ? [
+        {
+          holderName: consolidatedPortfolioSummary?.holderName || "Primary Holder",
+          values: {
+            cdslDematAccounts: Number(statementSummaryValues?.cdslDematAccounts) || 0,
+            nsdlDematAccounts: Number(statementSummaryValues?.nsdlDematAccounts) || 0,
+            mutualFundFolios: Number(statementSummaryValues?.mutualFundFolios) || 0
+          }
+        }
+      ]
+      : [];
+  const safeSelectedInvestorIndex =
+    investorSummaryViews.length > 0 ? Math.min(selectedInvestorIndex, investorSummaryViews.length - 1) : 0;
+  const activeInvestorSummary = investorSummaryViews[safeSelectedInvestorIndex] || null;
+  const activeSummaryCategoryRows = activeInvestorSummary
+    ? [
+      {
+        key: "cdslDematAccounts",
+        label: "CDSL Demat Accounts",
+        value: Number(activeInvestorSummary.values?.cdslDematAccounts) || 0
+      },
+      {
+        key: "nsdlDematAccounts",
+        label: "NSDL Demat Accounts",
+        value: Number(activeInvestorSummary.values?.nsdlDematAccounts) || 0
+      },
+      {
+        key: "mutualFundFolios",
+        label: "Mutual Fund Folios",
+        value: Number(activeInvestorSummary.values?.mutualFundFolios) || 0
+      }
+    ].sort((a, b) => b.value - a.value)
+    : [];
+  const activeSummaryTotal = activeSummaryCategoryRows.reduce((sum, row) => sum + (Number(row?.value) || 0), 0);
+  const consolidatedRowsByCategory = consolidatedRows.reduce((acc, row) => {
+    const key = mapConsolidatedTypeToSummaryKey(row?.accountType);
+    if (!key) return acc;
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(row);
+    return acc;
+  }, {});
+  const activeInvestorHasAttachedRows =
+    consolidatedRows.length > 0 &&
+    (investorSummaryViews.length <= 1 ||
+      areSameHolders(activeInvestorSummary?.holderName, consolidatedPortfolioSummary?.holderName));
+  const activeInvestorPan =
+    consolidatedPortfolioSummary?.pan &&
+    (investorSummaryViews.length <= 1 ||
+      areSameHolders(activeInvestorSummary?.holderName, consolidatedPortfolioSummary?.holderName))
+      ? consolidatedPortfolioSummary.pan
+      : null;
+  const yearlyValuation = Array.isArray(summary?.yearlyValuation) ? summary.yearlyValuation : [];
   const topMutualFund = [...mutualFundHoldings].sort((a, b) => (b.value || 0) - (a.value || 0))[0];
   const topDemat = [...dematHoldings]
     .filter(isValidEquityHoldingForInsights)
@@ -56,6 +181,14 @@ function DashboardSummary({ summary, mutualFundHoldings, dematHoldings, transact
         ? "Moderate concentration"
         : "Well diversified";
 
+  const assetClassColors = {
+    equity: "#3b82f6",
+    mutualFundFolios: "#f4b400",
+    mutualFundsHeldInDematForm: "#14b8a6",
+    equityDemat: "#3b82f6",
+    cdslDematAccounts: "#2563eb",
+    nsdlDematAccounts: "#7c3aed"
+  };
   const assetBreakupPieOptions = {
     chart: {
       type: "pie",
@@ -105,18 +238,11 @@ function DashboardSummary({ summary, mutualFundHoldings, dematHoldings, transact
       {
         type: "pie",
         name: "Allocation",
-        data: [
-          {
-            name: `Mutual Fund Folios (₹ ${mf.toLocaleString("en-IN")})`,
-            y: Number(mf.toFixed(2)),
-            color: "#f4b400"
-          },
-          {
-            name: `Equity / Demat (₹ ${demat.toLocaleString("en-IN")})`,
-            y: Number(demat.toFixed(2)),
-            color: "#3b82f6"
-          }
-        ]
+        data: sortedEffectiveAssetRows.map((row) => ({
+          name: `${row.label} (₹ ${(row.value || 0).toLocaleString("en-IN")})`,
+          y: Number((row.value || 0).toFixed(2)),
+          color: assetClassColors[row.key] || "#2563eb"
+        }))
       }
     ]
   };
@@ -134,7 +260,7 @@ function DashboardSummary({ summary, mutualFundHoldings, dematHoldings, transact
           </div>
           <div className="hero-value">
             <span>Total Value</span>
-            <strong>₹ {total.toLocaleString("en-IN")}</strong>
+            <strong>₹ {displayTotalValue.toLocaleString("en-IN")}</strong>
           </div>
         </div>
       </section>
@@ -145,8 +271,110 @@ function DashboardSummary({ summary, mutualFundHoldings, dematHoldings, transact
     <section className="dashboard-card">
       <section className="insight-section">
         <div className="insight-section-head">
-          <h3>Asset Class Breakup</h3>
-          <p>Allocation split by value across mutual funds and demat holdings.</p>
+          <h3>Summary of Investments</h3>
+          <p>Top categories with expandable account-level drilldown.</p>
+        </div>
+        {investorSummaryViews.length > 1 ? (
+          <div className="summary-investor-tabs">
+            {investorSummaryViews.map((entry, index) => (
+              <button
+                key={`${entry.holderName}-${index}`}
+                type="button"
+                className={`summary-investor-tab ${safeSelectedInvestorIndex === index ? "active" : ""}`}
+                onClick={() => {
+                  setSelectedInvestorIndex(index);
+                  setOpenSummaryCategoryKey(null);
+                }}
+              >
+                {entry.holderName}
+              </button>
+            ))}
+          </div>
+        ) : null}
+        {activeInvestorSummary ? (
+          <div className="summary-unified-layout">
+            <div className="summary-meta-strip">
+              <p>
+                <span>Holder</span>
+                <strong>
+                  {activeInvestorSummary.holderName || "-"}
+                  {activeInvestorPan ? ` (PAN: ${activeInvestorPan})` : ""}
+                </strong>
+              </p>
+              <p>
+                <span>Total Portfolio Value</span>
+                <strong>{formatCurrencyOrNA(activeSummaryTotal || statementTotal)}</strong>
+              </p>
+            </div>
+
+            <div className="summary-drilldown">
+              {activeSummaryCategoryRows.map((category) => {
+                const isOpen = openSummaryCategoryKey === category.key;
+                const rows = activeInvestorHasAttachedRows ? consolidatedRowsByCategory?.[category.key] || [] : [];
+
+                return (
+                  <article className="summary-drilldown-item" key={category.key}>
+                    <button
+                      type="button"
+                      className="summary-drilldown-trigger"
+                      onClick={() => setOpenSummaryCategoryKey((prev) => (prev === category.key ? null : category.key))}
+                    >
+                      <span>{category.label}</span>
+                      <span className="summary-drilldown-trigger-right">
+                        <strong>{formatCurrencyOrNA(category.value)}</strong>
+                        <span className="summary-drilldown-chevron">{isOpen ? "↑" : "↓"}</span>
+                      </span>
+                    </button>
+                    {isOpen ? (
+                      <div className="summary-drilldown-body">
+                        {rows.length ? (
+                          <div className="summary-account-table">
+                            <div className="summary-account-head">
+                              <span>Account Details</span>
+                              <span>ISINs / Schemes</span>
+                              <span>Value</span>
+                            </div>
+                            {rows.map((accountRow, rowIndex) => (
+                              <div key={`${category.key}-${rowIndex}`} className="summary-account-row">
+                                <span className="summary-account-details">
+                                  {accountRow.accountDetails || accountRow.accountType || "-"}
+                                </span>
+                                <span className="summary-account-count">
+                                  {typeof accountRow.schemesCount === "number" ? accountRow.schemesCount : "-"}
+                                </span>
+                                <strong className="summary-account-value">{formatCurrencyOrNA(accountRow.value)}</strong>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="summary-kpi-note">
+                            {activeInvestorHasAttachedRows
+                              ? "No account-level rows available for this category."
+                              : "Account-level rows are not reliably mapped per investor in this statement."}
+                          </p>
+                        )}
+                      </div>
+                    ) : null}
+                  </article>
+                );
+              })}
+            </div>
+            {!hasStatementBreakupData ? (
+              <p className="summary-kpi-note">
+                No summary-table values were parsed from this statement. This section will populate when
+                the uploaded CAS contains the Summary of Investments value table.
+              </p>
+            ) : null}
+          </div>
+        ) : (
+          <p className="summary-kpi-note">No summary data available for this statement.</p>
+        )}
+      </section>
+
+      <section className="insight-section">
+        <div className="insight-section-head">
+          <h3>Portfolio Value Split</h3>
+          <p>Distribution of total portfolio value by investment bucket from the statement.</p>
         </div>
         <div className="allocation-combined">
           <div className="allocation-layout">
@@ -160,19 +388,16 @@ function DashboardSummary({ summary, mutualFundHoldings, dematHoldings, transact
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Mutual Fund Folios</td>
-                    <td>₹ {mf.toLocaleString("en-IN")}</td>
-                    <td>{mfPct.toFixed(2)}%</td>
-                  </tr>
-                  <tr>
-                    <td>Equity / Demat</td>
-                    <td>₹ {demat.toLocaleString("en-IN")}</td>
-                    <td>{dematPct.toFixed(2)}%</td>
-                  </tr>
+                  {sortedEffectiveAssetRows.map((row) => (
+                    <tr key={row.key || row.label}>
+                      <td>{row.label}</td>
+                      <td>{formatCurrency(row.value)}</td>
+                      <td>{formatAssetPercentage(row.percentage, row.value, effectiveAssetTotal)}</td>
+                    </tr>
+                  ))}
                   <tr className="total-row">
                     <td>Total</td>
-                    <td>₹ {total.toLocaleString("en-IN")}</td>
+                    <td>{formatCurrency(effectiveAssetTotal)}</td>
                     <td>100.00%</td>
                   </tr>
                 </tbody>
@@ -313,6 +538,41 @@ function formatSignedPercent(value) {
   if (value === 0) return "0.00%";
   const sign = value > 0 ? "+" : "";
   return `${sign}${value.toFixed(2)}%`;
+}
+
+function formatCurrencyOrNA(value) {
+  if (typeof value !== "number") return "N/A";
+  return formatCurrency(value);
+}
+
+function formatPercentOfTotal(value, totalValue) {
+  if (typeof value !== "number" || typeof totalValue !== "number" || totalValue <= 0) return "-";
+  return `${((value / totalValue) * 100).toFixed(2)}%`;
+}
+
+function formatAssetPercentage(percentage, value, totalValue) {
+  if (typeof percentage === "number") return `${percentage.toFixed(2)}%`;
+  return formatPercentOfTotal(value, totalValue);
+}
+
+function mapConsolidatedTypeToSummaryKey(accountType) {
+  const text = String(accountType || "").toLowerCase();
+  if (text.includes("cdsl demat")) return "cdslDematAccounts";
+  if (text.includes("nsdl demat")) return "nsdlDematAccounts";
+  if (text.includes("mutual fund folios")) return "mutualFundFolios";
+  return null;
+}
+
+function areSameHolders(a, b) {
+  const left = normalizeHolderName(a);
+  const right = normalizeHolderName(b);
+  return left && right && left === right;
+}
+
+function normalizeHolderName(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 }
 
 function toTitleCase(value) {

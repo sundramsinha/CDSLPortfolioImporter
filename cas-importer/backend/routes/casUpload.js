@@ -44,6 +44,8 @@ router.post("/upload-cas", upload.single("file"), async (req, res, next) => {
     const transactions = parsed.transactions || [];
     const dematTransactions = parsed.dematTransactions || [];
     const statementSummary = parsed.statementSummary || null;
+    const assetClassBreakup = parsed.assetClassBreakup || null;
+    const consolidatedPortfolioSummary = parsed.consolidatedPortfolioSummary || null;
     const yearlyValuation = parsed.yearlyValuation || [];
     const accountDetails = parsed.accountDetails || null;
 
@@ -71,6 +73,8 @@ router.post("/upload-cas", upload.single("file"), async (req, res, next) => {
         dematPercentage: Number(dematPercentage.toFixed(2))
       },
       statementSummary,
+      assetClassBreakup,
+      consolidatedPortfolioSummary,
       yearlyValuation,
       accountDetails
     };
@@ -99,6 +103,8 @@ router.post("/upload-cas", upload.single("file"), async (req, res, next) => {
       dematTransactions,
       yearlyValuation,
       accountDetails,
+      assetClassBreakup,
+      consolidatedPortfolioSummary,
       summary,
       statementSummary,
       report: {

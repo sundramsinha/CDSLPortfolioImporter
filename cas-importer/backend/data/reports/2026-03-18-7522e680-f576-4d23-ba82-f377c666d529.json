@@ -1,0 +1,1321 @@
+{
+  "generatedAt": "2026-03-18T18:34:42.641Z",
+  "fileMeta": {
+    "filename": "FEB2026_AA73381604_TXN (1).pdf",
+    "sizeBytes": 453913
+  },
+  "summary": {
+    "totalFunds": 9,
+    "totalMutualFunds": 9,
+    "totalDematSecurities": 77,
+    "totalTransactions": 8,
+    "totalMutualFundValue": 64090.77,
+    "totalDematValue": 616595.42,
+    "totalPortfolioValue": 680686.19,
+    "allocation": {
+      "mutualFundPercentage": 9.42,
+      "dematPercentage": 90.58
+    },
+    "statementSummary": {
+      "statementAsOnDate": "28-02-2026",
+      "values": {
+        "cdslDematAccounts": 616595.42,
+        "nsdlDematAccounts": null,
+        "mutualFundFolios": 64090.77,
+        "totalPortfolioValue": 680686.19
+      },
+      "entries": [
+        {
+          "holderName": "Sundara Krishna Penugonda",
+          "values": {
+            "cdslDematAccounts": 616595.42,
+            "nsdlDematAccounts": null,
+            "mutualFundFolios": 64090.77
+          },
+          "rawTokens": {
+            "cdslDematAccounts": "6,16,595.42",
+            "nsdlDematAccounts": "N.A",
+            "mutualFundFolios": "64,090.77"
+          }
+        }
+      ],
+      "rawTokens": {
+        "cdslDematAccounts": "6,16,595.42",
+        "nsdlDematAccounts": "N.A",
+        "mutualFundFolios": "64,090.77",
+        "totalPortfolioValue": "6,80,686.19"
+      }
+    },
+    "assetClassBreakup": {
+      "rows": [
+        {
+          "key": "equity",
+          "label": "Equity",
+          "value": 279173.2,
+          "percentage": 41.01
+        },
+        {
+          "key": "mutualFundFolios",
+          "label": "Mutual Fund Folios",
+          "value": 64090.77,
+          "percentage": 9.42
+        },
+        {
+          "key": "mutualFundsHeldInDematForm",
+          "label": "Mutual Funds Held in Demat Form",
+          "value": 337422.22,
+          "percentage": 49.57
+        }
+      ],
+      "totalPortfolioValue": 680686.19,
+      "totalPercentage": 100
+    },
+    "consolidatedPortfolioSummary": {
+      "holderName": "SUNDARA KRISHNA PENUGONDA",
+      "pan": "FIEPP9428Q",
+      "rows": [
+        {
+          "accountType": "CDSL Demat Account",
+          "accountDetails": "INDSTOCKS PRIVATE LIMITED DP Id: 12095500 Client Id :44321434",
+          "schemesCount": 0,
+          "value": 0
+        },
+        {
+          "accountType": "CDSL Demat Account",
+          "accountDetails": "ZERODHA BROKING LIMITED DP Id: 12081601 Client Id :60224797",
+          "schemesCount": 38,
+          "value": 289907.92
+        },
+        {
+          "accountType": "CDSL Demat Account",
+          "accountDetails": "GROWW INVEST TECH PRIVATE LIMITED DP Id: 12088703 Client Id :13488427",
+          "schemesCount": 39,
+          "value": 326687.5
+        },
+        {
+          "accountType": "Mutual Fund Folios",
+          "accountDetails": "9 Folios",
+          "schemesCount": 9,
+          "value": 64090.77
+        }
+      ],
+      "totalValue": 680686.19,
+      "grandTotalValue": 680686.19
+    },
+    "yearlyValuation": [
+      {
+        "month": "Mar",
+        "year": 2025,
+        "monthYear": "Mar 2025",
+        "portfolioValue": 55691.53,
+        "changeValue": null,
+        "changePercent": null
+      },
+      {
+        "month": "Apr",
+        "year": 2025,
+        "monthYear": "Apr 2025",
+        "portfolioValue": 58300.23,
+        "changeValue": 2608.7,
+        "changePercent": 4.68
+      },
+      {
+        "month": "May",
+        "year": 2025,
+        "monthYear": "May 2025",
+        "portfolioValue": 81227.88,
+        "changeValue": 22927.65,
+        "changePercent": 39.33
+      },
+      {
+        "month": "Jun",
+        "year": 2025,
+        "monthYear": "Jun 2025",
+        "portfolioValue": 150967.5,
+        "changeValue": 69739.62,
+        "changePercent": 85.86
+      },
+      {
+        "month": "Jul",
+        "year": 2025,
+        "monthYear": "Jul 2025",
+        "portfolioValue": 209958.22,
+        "changeValue": 58990.72,
+        "changePercent": 39.08
+      },
+      {
+        "month": "Aug",
+        "year": 2025,
+        "monthYear": "Aug 2025",
+        "portfolioValue": 224180.24,
+        "changeValue": 14222.02,
+        "changePercent": 6.77
+      },
+      {
+        "month": "Sep",
+        "year": 2025,
+        "monthYear": "Sep 2025",
+        "portfolioValue": 276958.7,
+        "changeValue": 52778.46,
+        "changePercent": 23.54
+      },
+      {
+        "month": "Oct",
+        "year": 2025,
+        "monthYear": "Oct 2025",
+        "portfolioValue": 363315.82,
+        "changeValue": 86357.12,
+        "changePercent": 31.18
+      },
+      {
+        "month": "Nov",
+        "year": 2025,
+        "monthYear": "Nov 2025",
+        "portfolioValue": 500312.24,
+        "changeValue": 136996.42,
+        "changePercent": 37.71
+      },
+      {
+        "month": "Dec",
+        "year": 2025,
+        "monthYear": "Dec 2025",
+        "portfolioValue": 730510.28,
+        "changeValue": 230198.04,
+        "changePercent": 46.01
+      },
+      {
+        "month": "Jan",
+        "year": 2026,
+        "monthYear": "Jan 2026",
+        "portfolioValue": 876369.53,
+        "changeValue": 145859.25,
+        "changePercent": 19.97
+      },
+      {
+        "month": "Feb",
+        "year": 2026,
+        "monthYear": "Feb 2026",
+        "portfolioValue": 680686.19,
+        "changeValue": -195683.34,
+        "changePercent": -22.33
+      }
+    ],
+    "accountDetails": {
+      "primaryHolderName": "Sundara Krishna Penugonda",
+      "pan": "FIEPP9428Q",
+      "dematAccounts": [
+        {
+          "dpName": "INDSTOCKS PRIVATE LIMITED",
+          "dpId": "12095500",
+          "clientId": "44321434",
+          "email": "psundarakrishna@gmail.com",
+          "mobile": "XXXXXX5191",
+          "boSubStatus": "Individual- Resident Negative Nomination",
+          "bsda": "NO RGESS : NO Account Status : Active BO Status : INDIVIDUAL Frozen Status : Not Frozen",
+          "nominee": "Not Registered",
+          "rgess": "NO",
+          "accountStatus": "Active",
+          "frozenStatus": "Not Frozen",
+          "boStatus": "INDIVIDUAL"
+        },
+        {
+          "dpName": "ZERODHA BROKING LIMITED",
+          "dpId": "12081601",
+          "clientId": "60224797",
+          "email": "PSUNDARAKRISHNA@GMAIL.COM",
+          "mobile": "XXXXXX5191",
+          "boSubStatus": "Individual- Resident Negative Nomination",
+          "bsda": "NO RGESS : NO Account Status : Active BO Status : INDIVIDUAL Frozen Status : Not Frozen",
+          "nominee": "Not Registered",
+          "rgess": "NO",
+          "accountStatus": "Active",
+          "frozenStatus": "Not Frozen",
+          "boStatus": "INDIVIDUAL"
+        },
+        {
+          "dpName": "GROWW INVEST TECH PRIVATE LIMITED",
+          "dpId": "12088703",
+          "clientId": "13488427",
+          "email": "psundarakrishna@gmail.com",
+          "mobile": "XXXXXX5191",
+          "boSubStatus": "Individual- Resident Negative Nomination",
+          "bsda": "YES RGESS : NO Account Status : Active BO Status : INDIVIDUAL Frozen Status : Not Frozen",
+          "nominee": "Not Registered",
+          "rgess": "NO",
+          "accountStatus": "Active",
+          "frozenStatus": "Not Frozen",
+          "boStatus": "INDIVIDUAL"
+        }
+      ],
+      "mutualFundFolios": [
+        {
+          "amcName": "Aditya Birla Sun Life Mutual Fund",
+          "schemeName": "Aditya Birla Sun Life Money Manager Fund - Growth- Regular Plan",
+          "schemeCode": "151IG",
+          "folioNo": "1049347693",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF209K01RV7",
+          "ucc": "MFBRLA0016",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Aditya Birla Sun Life Mutual Fund",
+          "schemeName": "Aditya Birla Sun Life Gold Fund Growth-Direct Plan",
+          "schemeCode": "916GZ",
+          "folioNo": "1049394060",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Not Opted",
+          "isin": "INF209K01YU5",
+          "ucc": "MFBRLA0309",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Aditya Birla Sun Life Mutual Fund",
+          "schemeName": "Aditya Birla Sun Life Gold Fund Growth-Regular Plan",
+          "schemeCode": "916G",
+          "folioNo": "1049413813",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF209K01PF4",
+          "ucc": "MFBRLA0309",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "HDFC Mutual Fund",
+          "schemeName": "HDFC Large and Mid Cap Fund - Regular Plan - Growth",
+          "schemeCode": "GFGPG",
+          "folioNo": "31227542/71",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF179KA1RT1",
+          "ucc": "MFHDFC0499",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "HDFC Mutual Fund",
+          "schemeName": "HDFC Flexi Cap Fund - Regular Plan - Growth",
+          "schemeCode": "02",
+          "folioNo": "36160730/88",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF179K01608",
+          "ucc": "MFHDFC0019",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "ICICI Prudential Mutual Fund",
+          "schemeName": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Growth",
+          "schemeCode": "1191",
+          "folioNo": "33853274/51",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF109K01BL4",
+          "ucc": "MFPRUI0089",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Nippon India Mutual Fund",
+          "schemeName": "NIPPON INDIA SMALL CAP FUND - DIRECT GROWTH PLAN GROWTH OPTION",
+          "schemeCode": "SCAG",
+          "folioNo": "477390276016/0",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Opt-Out",
+          "isin": "INF204K01K15",
+          "ucc": "MFRILC0135",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Nippon India Mutual Fund",
+          "schemeName": "NIPPON INDIA SMALL CAP FUND - GROWTH PLAN GROWTH OPTION",
+          "schemeCode": "SCGP",
+          "folioNo": "499388154692/0",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF204K01HY3",
+          "ucc": "MFRILC0135",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "PPFAS Mutual Fund",
+          "schemeName": "Parag Parikh Flexi Cap Fund - Regular Plan Growth",
+          "schemeCode": "001RG",
+          "folioNo": "15524665",
+          "modeOfHolding": "Single",
+          "email": "psundarakrishna@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX5191",
+          "nominee": "Registered",
+          "isin": "INF879O01019",
+          "ucc": "MFPPFA0001",
+          "rta": "CAMS"
+        }
+      ],
+      "totals": {
+        "dematAccounts": 3,
+        "mutualFundFolios": 9
+      }
+    }
+  },
+  "mutualFundHoldings": [
+    {
+      "amc": "Aditya Birla Sun Life Mutual Fund",
+      "scheme_name": "Aditya Birla Sun Life Money Manager Fund - Growth- Regular Plan",
+      "folio_number": "1049347693",
+      "units": 17.503,
+      "nav": 385.3568,
+      "value": 6744.9
+    },
+    {
+      "amc": "Aditya Birla Sun Life Mutual Fund",
+      "scheme_name": "Aditya Birla Sun Life Gold Fund Growth-Direct Plan",
+      "folio_number": "1049394060",
+      "units": 68.868,
+      "nav": 47.9291,
+      "value": 3300.78
+    },
+    {
+      "amc": "Aditya Birla Sun Life Mutual Fund",
+      "scheme_name": "Aditya Birla Sun Life Gold Fund Growth-Regular Plan",
+      "folio_number": "1049413813",
+      "units": 315.327,
+      "nav": 46.022,
+      "value": 14511.98
+    },
+    {
+      "amc": "HDFC Mutual Fund",
+      "scheme_name": "HDFC Large and Mid Cap Fund - Regular Plan - Growth",
+      "folio_number": "31227542/71",
+      "units": 19.909,
+      "nav": 340.771,
+      "value": 6784.41
+    },
+    {
+      "amc": "Nippon India Mutual Fund",
+      "scheme_name": "NIPPON INDIA SMALL CAP FUND - DIRECT GROWTH PLAN GROWTH OPTION",
+      "folio_number": "477390276016/0",
+      "units": 17.31,
+      "nav": 182.5548,
+      "value": 3160.02
+    },
+    {
+      "amc": "Nippon India Mutual Fund",
+      "scheme_name": "NIPPON INDIA SMALL CAP FUND - GROWTH PLAN GROWTH OPTION",
+      "folio_number": "499388154692/0",
+      "units": 25.503,
+      "nav": 162.1622,
+      "value": 4135.62
+    },
+    {
+      "amc": "PPFAS Mutual Fund",
+      "scheme_name": "Parag Parikh Flexi Cap Fund - Regular Plan Growth",
+      "folio_number": "15524665",
+      "units": 89.1,
+      "nav": 84.0452,
+      "value": 7488.43
+    },
+    {
+      "amc": "HDFC Mutual Fund",
+      "scheme_name": "HDFC Flexi Cap Fund - Regular Plan - Growth",
+      "folio_number": "36160730/88",
+      "units": 2.514,
+      "nav": 2060.127,
+      "value": 5179.16
+    },
+    {
+      "amc": "ICICI Prudential Mutual Fund",
+      "scheme_name": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Growth",
+      "folio_number": "33853274/51",
+      "units": 113.983,
+      "nav": 112.17,
+      "value": 12785.47
+    }
+  ],
+  "dematHoldings": [
+    {
+      "isin": "INE931S01010",
+      "security_name": "ADANI ENERGY SOLUTIONS LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 6,
+      "free_balance": 6,
+      "market_price": 1011.05,
+      "value": 6066.3
+    },
+    {
+      "isin": "INE423A01024",
+      "security_name": "ADANI ENTERPRISES LIMITED- EQUITY SHARES OF RS 1/- EACH AFTER SUB DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 2164.8,
+      "value": 6494.4
+    },
+    {
+      "isin": "INE814H01029",
+      "security_name": "ADANI POWER LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.2/- AFTER SUB- DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 40,
+      "free_balance": 40,
+      "market_price": 140.1,
+      "value": 5604
+    },
+    {
+      "isin": "INE713T01028",
+      "security_name": "APOLLO MICRO SYSTEMS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RE.1/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 30,
+      "free_balance": 30,
+      "market_price": 237.9,
+      "value": 7137
+    },
+    {
+      "isin": "INE386C01029",
+      "security_name": "ASTRA MICROWAVE PRODUCTS LIMITED - EQUITY SHARES OF RS.2/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 968.45,
+      "value": 1936.9
+    },
+    {
+      "isin": "INE02IJ01035",
+      "security_name": "AZAD ENGINEERING LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.2/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 1710.65,
+      "value": 3421.3
+    },
+    {
+      "isin": "INE171Z01026",
+      "security_name": "BHARAT DYNAMICS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.5/-AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 1265.35,
+      "value": 3796.05
+    },
+    {
+      "isin": "INE263A01024",
+      "security_name": "BHARAT ELECTRONICS LIMITEDEQ SH WITH FACE VALUE RE. 1/- AFTER SUB DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 444.45,
+      "value": 888.9
+    },
+    {
+      "isin": "INE465A01025",
+      "security_name": "BHARAT FORGE LIMITED - NEW EQUITY SHARES OF RS.2/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 1,
+      "free_balance": 1,
+      "market_price": 1910.95,
+      "value": 1910.95
+    },
+    {
+      "isin": "INE118H01025",
+      "security_name": "BSE LIMITED NEW EQUITY SHARES WITH FV RS 2/- AFTER CONSOLIDATION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 2707.1,
+      "value": 8121.3
+    },
+    {
+      "isin": "INE522F01014",
+      "security_name": "COAL INDIA LIMITED - EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 430.7,
+      "value": 4307
+    },
+    {
+      "isin": "INE704P01025",
+      "security_name": "COCHIN SHIPYARD LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.5/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 1,
+      "free_balance": 1,
+      "market_price": 1492.9,
+      "value": 1492.9
+    },
+    {
+      "isin": "INE955D01029",
+      "security_name": "GENUS POWER INFRASTRUCTURES LIMITED EQTY SHARES - NEW EQUITY SHARES OF RE.1/- AFTER SUB- DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 1,
+      "free_balance": 1,
+      "market_price": 262.4,
+      "value": 262.4
+    },
+    {
+      "isin": "INE040A01034",
+      "security_name": "HDFC BANK LIMITEDNEW EQUITY SHARES WITH FACE VALUE RE. 1/- AFTER SUBDIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 4,
+      "free_balance": 4,
+      "market_price": 887.4,
+      "value": 3549.6
+    },
+    {
+      "isin": "INF179KC1981",
+      "security_name": "HDFC AMC LTD#HDFC MF- HDFC GOLD ETF",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-1",
+      "quantity": 200,
+      "free_balance": 200,
+      "market_price": 136.05,
+      "value": 27210
+    },
+    {
+      "isin": "INF179KC1DI2",
+      "security_name": "HDFC AMC LTD#HDFC MF- HDFC SILVER ETF",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-1",
+      "quantity": 176,
+      "free_balance": 176,
+      "market_price": 253.22,
+      "value": 44566.72
+    },
+    {
+      "isin": "INE267A01025",
+      "security_name": "HINDUSTAN ZINC LIMITED- NEW EQUITY SHARES OF RS-2/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 603.85,
+      "value": 6038.5
+    },
+    {
+      "isin": "INE038A01020",
+      "security_name": "HINDALCO INDUSTRIES LIMITED - EQUITY SHARES OF RE.1/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 925.95,
+      "value": 9259.5
+    },
+    {
+      "isin": "INE531E01026",
+      "security_name": "HINDUSTAN COPPER LIMITED EQUITY SHARES OF RS. 5/- AFTER CAPITAL REDUCTION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 28,
+      "free_balance": 28,
+      "market_price": 567.55,
+      "value": 15891.4
+    },
+    {
+      "isin": "INE066F01020",
+      "security_name": "HINDUSTAN AERONAUTICS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.5/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 3914,
+      "value": 11742
+    },
+    {
+      "isin": "INF109KC1Y56",
+      "security_name": "ICICI PRUDENTIAL AMC LTD#ICICI PRUDENTIAL MF- ICICI PRUDENTIAL SILVER ETF",
+      "amc": "ICICI PRUDENTIAL AMC LTD",
+      "account_key": "dp-1",
+      "quantity": 15,
+      "free_balance": 15,
+      "market_price": 263.64,
+      "value": 3954.6
+    },
+    {
+      "isin": "INF109KC1NT3",
+      "security_name": "ICICI PRUD ASSET MGMT CO LTD#ICICI PRU MF-ICICI PRUENTIAL GOLD EXCHANGE TRADED FUND",
+      "amc": "ICICI PRUD ASSET MGMT CO LTD",
+      "account_key": "dp-1",
+      "quantity": 30,
+      "free_balance": 30,
+      "market_price": 136.28,
+      "value": 4088.4
+    },
+    {
+      "isin": "INE039A01010",
+      "security_name": "IFCI LTD-THE INDUSTRIAL FIN CORP OF INDIA LTD-EQ SHARES",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 100,
+      "free_balance": 100,
+      "market_price": 59.97,
+      "value": 5997
+    },
+    {
+      "isin": "INE022Q01020",
+      "security_name": "INDIAN ENERGY EXCHANGE LIMITEDNEW EQUITY SHARES FACE VALUE RE. 1/- AFTER SUB DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 125.15,
+      "value": 625.75
+    },
+    {
+      "isin": "INE053F01010",
+      "security_name": "INDIAN RAILWAY FINANCE CORPORATION LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 103.55,
+      "value": 517.75
+    },
+    {
+      "isin": "INE758E01017",
+      "security_name": "JIO FINANCIAL SERVICES LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 255.35,
+      "value": 510.7
+    },
+    {
+      "isin": "INE101A01026",
+      "security_name": "MAHINDRA & MAHINDRA EQUITY SHARES - EQUITY SHARES OF RS 5/- AFTER SUB DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 3399.9,
+      "value": 6799.8
+    },
+    {
+      "isin": "INE249Z01020",
+      "security_name": "MAZAGON DOCK SHIPBUILDERS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.5/- AFTER SUB- DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 8,
+      "free_balance": 8,
+      "market_price": 2223.6,
+      "value": 17788.8
+    },
+    {
+      "isin": "INE745G01043",
+      "security_name": "MULTI COMMODITY EXCHANGE OF INDIA LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.2/-AFTER SUB- DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 15,
+      "free_balance": 15,
+      "market_price": 2444.35,
+      "value": 36665.25
+    },
+    {
+      "isin": "INE139A01034",
+      "security_name": "NATIONAL ALUMINIUM COMPANY LIMITED-NEW EQUITY SHARES OF RS-5/-AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 20,
+      "free_balance": 20,
+      "market_price": 354.85,
+      "value": 7097
+    },
+    {
+      "isin": "INE0LXG01040",
+      "security_name": "OLA ELECTRIC MOBILITY LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 20,
+      "free_balance": 20,
+      "market_price": 25.22,
+      "value": 504.4
+    },
+    {
+      "isin": "INE982J01020",
+      "security_name": "ONE97 COMMUNICATIONS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RE. 1/- AFTER SUB DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 1096.15,
+      "value": 2192.3
+    },
+    {
+      "isin": "INE045601023",
+      "security_name": "PARAS DEFENCE AND SPACE TECHNOLOGIES LIMITEDNEW EQUITY SHARES WITH FV RS.5/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 638.3,
+      "value": 6383
+    },
+    {
+      "isin": "INE040H01021",
+      "security_name": "SUZLON ENERGY LIMITED - NEW EQUITY SHARES OF RS. 2/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 42.7,
+      "value": 427
+    },
+    {
+      "isin": "INF277KA1976",
+      "security_name": "TATA ASSET MANAGEMENT LTD#TATA MF-TATA GOLD EXCHANGE TRADED FUND",
+      "amc": "TATA ASSET MANAGEMENT LTD",
+      "account_key": "dp-1",
+      "quantity": 200,
+      "free_balance": 200,
+      "market_price": 15.41,
+      "value": 3082
+    },
+    {
+      "isin": "INF277KA1984",
+      "security_name": "TATA AM LTD#TATA MF-TATA SILVER EXCHANGE TRADED FUND",
+      "amc": "TATA AM LTD",
+      "account_key": "dp-1",
+      "quantity": 200,
+      "free_balance": 200,
+      "market_price": 25.65,
+      "value": 5130
+    },
+    {
+      "isin": "INE205A01025",
+      "security_name": "VEDANTA LIMITEDEQUITY SHARES OF RE 1/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 20,
+      "free_balance": 20,
+      "market_price": 718.45,
+      "value": 14369
+    },
+    {
+      "isin": "INE251B01027",
+      "security_name": "ZEN TECHNOLOGIES LIMITED NEW EQ SH WITH FV RS.1/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-1",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 1359.35,
+      "value": 4078.05
+    },
+    {
+      "isin": "INF2JJD01136",
+      "security_name": "ABAKKUS INVESTMENT MANAGERS PRIVATE LIMITED#ABAKKUS MF- ABAKKUS FLEXI CAP FUND- DIRECT GROWTH",
+      "amc": "ABAKKUS INVESTMENT MANAGERS PRIVATE LIMITED",
+      "account_key": "dp-2",
+      "quantity": 999.95,
+      "free_balance": 999.95,
+      "market_price": 10.045,
+      "value": 10044.5
+    },
+    {
+      "isin": "INF209K01YU5",
+      "security_name": "ADITYA BIRLA SUN LIFE AMC LTD#ADITYA BIRLA SUN LIFE MF-ADITYA BIRLA SUN LIFE GOLD FUND-DIRAN-GROWTH",
+      "amc": "ADITYA BIRLA SUN LIFE AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 412.723,
+      "free_balance": 412.723,
+      "market_price": 47.929,
+      "value": 19781.4
+    },
+    {
+      "isin": "INF209K01UU3",
+      "security_name": "ADITYA BIRLA SUN LIFE AMC LTD#ABSL MF-ABSL MONEY MANAGER FUND-DIRECT- GROWTH",
+      "amc": "ADITYA BIRLA SUN LIFE AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 35.167,
+      "free_balance": 35.167,
+      "market_price": 390.728,
+      "value": 13740.73
+    },
+    {
+      "isin": "INE622W01025",
+      "security_name": "ACME SOLAR HOLDINGS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS. 2/- AFTER SUBDIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 236.15,
+      "value": 472.3
+    },
+    {
+      "isin": "INE647O01011",
+      "security_name": "ADITYA BIRLA FASHION AND RETAIL LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 67.03,
+      "value": 670.3
+    },
+    {
+      "isin": "INE713T01028",
+      "security_name": "APOLLO MICRO SYSTEMS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RE.1/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 7,
+      "free_balance": 7,
+      "market_price": 237.9,
+      "value": 1665.3
+    },
+    {
+      "isin": "INE238A01034",
+      "security_name": "AXIS BANK LIMITED NEW EQUITY SHARES OF RS.2/- AFTER SUBDIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 1383.85,
+      "value": 6919.25
+    },
+    {
+      "isin": "INE465A01025",
+      "security_name": "BHARAT FORGE LIMITED - NEW EQUITY SHARES OF RS.2/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 2,
+      "free_balance": 2,
+      "market_price": 1910.95,
+      "value": 3821.9
+    },
+    {
+      "isin": "INF740KA1MG9",
+      "security_name": "DSP ASSET MANAGERS PVT LTD#DSP MF-DSP NIFTY NEXT 50 INDEX FUND-DIRECT- GROWTH",
+      "amc": "DSP ASSET MANAGERS PVT LTD",
+      "account_key": "dp-2",
+      "quantity": 296.878,
+      "free_balance": 296.878,
+      "market_price": 27.537,
+      "value": 8175.13
+    },
+    {
+      "isin": "INE758T01015",
+      "security_name": "ETERNAL LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 246.45,
+      "value": 1232.25
+    },
+    {
+      "isin": "INE756I01012",
+      "security_name": "HDB FINANCIAL SERVICES LIMITED- EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 20,
+      "free_balance": 20,
+      "market_price": 705.7,
+      "value": 14114
+    },
+    {
+      "isin": "INF179K01UT0",
+      "security_name": "HDFC AMC LTD#HDFC MF- HDFC FLEXI CAP FUND-DIRECT- GROWTH",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 9.329,
+      "free_balance": 9.329,
+      "market_price": 2261.528,
+      "value": 21097.79
+    },
+    {
+      "isin": "INF179K01VX0",
+      "security_name": "HDFC AMC LTD# HDFC MF - HDFC GOLD ETF FUND OF FUND - DIRECT PLAN- GROWTH",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 287.588,
+      "free_balance": 287.588,
+      "market_price": 49.698,
+      "value": 14292.55
+    },
+    {
+      "isin": "INF179KC1981",
+      "security_name": "HDFC AMC LTD#HDFC MF- HDFC GOLD ETF",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 136.05,
+      "value": 1360.5
+    },
+    {
+      "isin": "INF179KA1RQ7",
+      "security_name": "HDFC AMC LTD#HDFC MF- HDFC LARGE & MID CAP FUND- DIRECT-GROWTH",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 77.947,
+      "free_balance": 77.947,
+      "market_price": 360.058,
+      "value": 28065.44
+    },
+    {
+      "isin": "INF179K01XQ0",
+      "security_name": "HDFC AMC LTD# HDFC MF - HDFC MID CAP FUND DIRECT PLAN GROWTH",
+      "amc": "HDFC AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 22.115,
+      "free_balance": 22.115,
+      "market_price": 223.956,
+      "value": 4952.79
+    },
+    {
+      "isin": "INE066F01020",
+      "security_name": "HINDUSTAN AERONAUTICS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.5/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 3914,
+      "value": 11742
+    },
+    {
+      "isin": "INF109KC1Y98",
+      "security_name": "ICICI PRUDENTIAL AMC LTD#ICICI PRU MF-ICICI PRU SILVER ETF FOF-DIRECT- GROWTH",
+      "amc": "ICICI PRUDENTIAL AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 0,
+      "free_balance": null,
+      "market_price": 40.435,
+      "value": 0
+    },
+    {
+      "isin": "INF109K016L0",
+      "security_name": "ICICI PRUD AMC LTD#ICICI PRUD MF-ICICI PRUD LARGE CAP FUND-DIRECT-GROWTH",
+      "amc": "ICICI PRUD AMC LTD",
+      "account_key": "dp-2",
+      "quantity": 203.417,
+      "free_balance": 203.417,
+      "market_price": 123.6,
+      "value": 25142.34
+    },
+    {
+      "isin": "INE335Y01020",
+      "security_name": "INDIAN RAILWAY CATERING AND TOURISM CORPORATION LTDNEW EQUITY SHARES WITH FV RS.2/-AFT SUB DIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 4,
+      "free_balance": 4,
+      "market_price": 571.25,
+      "value": 2285
+    },
+    {
+      "isin": "INE154A01025",
+      "security_name": "ITC LIMITED - EQUITY SHARES OF RE.1/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 313.6,
+      "value": 1568
+    },
+    {
+      "isin": "INF090I01JR0",
+      "security_name": "FRANKLIN TEMP AM (I) PVT LTD#FRANKLIN TEMP MF- FRANKLIN FT INDIA FEEDER -U. S. OPP FD-DIRECT PL-GR",
+      "amc": "FRANKLIN TEMP AM (I) PVT LTD",
+      "account_key": "dp-2",
+      "quantity": 52.99,
+      "free_balance": 52.99,
+      "market_price": 89.711,
+      "value": 4753.79
+    },
+    {
+      "isin": "INE848E01016",
+      "security_name": "NHPC LIMITED - EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 75.36,
+      "value": 753.6
+    },
+    {
+      "isin": "INF204K01I50",
+      "security_name": "NIPPON LIFE INDIA AM LTD#NIPPON INDIA MF-NIPPON INDIA PHARMA FUND-DIRECT PL-GR PL-GROWTH",
+      "amc": "NIPPON LIFE INDIA AM LTD",
+      "account_key": "dp-2",
+      "quantity": 17.297,
+      "free_balance": 17.297,
+      "market_price": 576.925,
+      "value": 9979.07
+    },
+    {
+      "isin": "INF204K01K15",
+      "security_name": "NIPPON LIFE INDIA AM LTD#NIPPON INDIA MF-NIPPON INDIA SMALL CAP FUND DIRECT PL DV PL-GROWTH OPT",
+      "amc": "NIPPON LIFE INDIA AM LTD",
+      "account_key": "dp-2",
+      "quantity": 120.943,
+      "free_balance": 120.943,
+      "market_price": 182.555,
+      "value": 22078.75
+    },
+    {
+      "isin": "INF204KC1378",
+      "security_name": "NIPPON INDIA AM LTD#NIPPON INDIA MF-NIPPON INDIA SILVER ETF FOF-DIRECT-GROWTH",
+      "amc": "NIPPON INDIA AM LTD",
+      "account_key": "dp-2",
+      "quantity": 782.942,
+      "free_balance": 782.942,
+      "market_price": 40.332,
+      "value": 31577.62
+    },
+    {
+      "isin": "INE584A01023",
+      "security_name": "NMDC LIMITED - EQUITY SHARES OF RE. 1/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 81.8,
+      "value": 818
+    },
+    {
+      "isin": "INE733E01010",
+      "security_name": "NTPC LIMITED-EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 381.85,
+      "value": 1909.25
+    },
+    {
+      "isin": "INE244B01030",
+      "security_name": "PATEL ENGINEERING LTD- EQUITY SHARES OF RE.1/-AFTER SUBDIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 27.61,
+      "value": 276.1
+    },
+    {
+      "isin": "INF879O01027",
+      "security_name": "PPFAS AM PVT LTD#PPFAS MF- PARAG PARIKH FLEXI CAP FUND-DIRECT PLAN-GROWTH OPTION",
+      "amc": "PPFAS AM PVT LTD",
+      "account_key": "dp-2",
+      "quantity": 314.374,
+      "free_balance": 314.374,
+      "market_price": 91.954,
+      "value": 28907.95
+    },
+    {
+      "isin": "INE002A01018",
+      "security_name": "RELIANCE INDUSTRIES LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 1394.3,
+      "value": 6971.5
+    },
+    {
+      "isin": "INE614G01033",
+      "security_name": "RELIANCE POWER LIMITED - EQUITY SHARES AFTER CONSOLIDATION RS. 10/-.",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 20,
+      "free_balance": 20,
+      "market_price": 23.96,
+      "value": 479.2
+    },
+    {
+      "isin": "INE062A01020",
+      "security_name": "STATE BANK OF INDIA NEW EQUITY SHARES OF FV RE. 1/- AFTER SUBDIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 1202,
+      "value": 6010
+    },
+    {
+      "isin": "INF200K01UY4",
+      "security_name": "SBI FUNDS MANAGEMENT LIMITED#SBI MF-SBI PSU FUND DIRECT PL GROWTH",
+      "amc": "SBI FUNDS MANAGEMENT LIMITED",
+      "account_key": "dp-2",
+      "quantity": 132.325,
+      "free_balance": 132.325,
+      "market_price": 41.112,
+      "value": 5440.15
+    },
+    {
+      "isin": "INE040H01021",
+      "security_name": "SUZLON ENERGY LIMITED - NEW EQUITY SHARES OF RS. 2/- AFTER SPLIT",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 10,
+      "free_balance": 10,
+      "market_price": 42.7,
+      "value": 427
+    },
+    {
+      "isin": "INE976I01016",
+      "security_name": "TATA CAPITAL LIMITED - EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 31,
+      "free_balance": 31,
+      "market_price": 332.9,
+      "value": 10319.9
+    },
+    {
+      "isin": "INE1TAE01010",
+      "security_name": "TATA MOTORS LIMITED EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 504.9,
+      "value": 1514.7
+    },
+    {
+      "isin": "INE155A01022",
+      "security_name": "TATA MOTORS PASSENGER VEHICLES LIMITED - NEW EQUITY SHARES OF RS. 2/- AFTER SUB-DIVISION",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 3,
+      "free_balance": 3,
+      "market_price": 383.15,
+      "value": 1149.45
+    },
+    {
+      "isin": "INE010J01012",
+      "security_name": "TEJAS NETWORKS LIMITED - EQUITY SHARES",
+      "amc": null,
+      "account_key": "dp-2",
+      "quantity": 5,
+      "free_balance": 5,
+      "market_price": 435.6,
+      "value": 2178
+    }
+  ],
+  "transactions": [],
+  "dematTransactions": [
+    {
+      "isin": "INF109KC1Y56",
+      "security": "ICICI PRUDENTIAL AMC LTD#ICICI PRUDENTIAL MF- ICICI PRUDENTIAL SILVER ETF",
+      "transactionParticulars": "INTDEP-CR CM M51766 TM/CP 13906 SETT 1211232026024",
+      "date": "06-02-2026",
+      "openingBalance": 0,
+      "credit": 15,
+      "debit": null,
+      "closingBalance": 15,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF109KC1NT3",
+      "security": "ICICI PRUD ASSET MGMT CO LTD#ICICI PRU MF-ICICI PRUENTIAL GOLD EXCHANGE TRADED FUND",
+      "transactionParticulars": "INTDEP-CR CM M51766 TM/CP 13906 SETT 1211232026024",
+      "date": "06-02-2026",
+      "openingBalance": 0,
+      "credit": 30,
+      "debit": null,
+      "closingBalance": 30,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF209K01YU5",
+      "security": "ADITYA BIRLA SUN LIFE AMC LTD#ADITYA BIRLA SUN LIFE MF-ADITYA BIRLA SUN LIFE GOLD FUND- DIRAN-GROWTH",
+      "transactionParticulars": "BSEDR SE:1110152526207 CM:6699 1208870000000022 00708097",
+      "date": "02-02-2026",
+      "openingBalance": 1675.137,
+      "credit": null,
+      "debit": 828.649,
+      "closingBalance": 846.488,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF209K01YU5",
+      "security": "ADITYA BIRLA SUN LIFE AMC LTD#ADITYA BIRLA SUN LIFE MF-ADITYA BIRLA SUN LIFE GOLD FUND- DIRAN-GROWTH",
+      "transactionParticulars": "BSEDR SE:1110152526217 CM:6699 1208870000000022 00678231",
+      "date": "16-02-2026",
+      "openingBalance": null,
+      "credit": null,
+      "debit": 433.765,
+      "closingBalance": 412.723,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF179K01VX0",
+      "security": "HDFC AMC LTD# HDFC MF - HDFC GOLD ETF FUND OF FUND - DIRECT PLAN- GROWTH",
+      "transactionParticulars": "BSEDR SE:1110152526207 CM:6699 1208870000000022 00706080",
+      "date": "02-02-2026",
+      "openingBalance": 1410.691,
+      "credit": null,
+      "debit": 702.997,
+      "closingBalance": 707.694,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF179K01VX0",
+      "security": "HDFC AMC LTD# HDFC MF - HDFC GOLD ETF FUND OF FUND - DIRECT PLAN- GROWTH",
+      "transactionParticulars": "BSEDR SE:1110152526217 CM:6699 1208870000000022 00678403",
+      "date": "16-02-2026",
+      "openingBalance": null,
+      "credit": null,
+      "debit": 420.106,
+      "closingBalance": 287.588,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF109KC1Y98",
+      "security": "ICICI PRUDENTIAL AMC LTD#ICICI PRU MF-ICICI PRU SILVER ETF FOF- DIRECT-GROWTH",
+      "transactionParticulars": "BSEDR SE:1110152526207 CM:6699 1208870000000022 00706335",
+      "date": "02-02-2026",
+      "openingBalance": 825.807,
+      "credit": null,
+      "debit": 825.807,
+      "closingBalance": 0,
+      "stampDuty": 0
+    },
+    {
+      "isin": "INF204KC1378",
+      "security": "NIPPON INDIA AM LTD#NIPPON INDIA MF- NIPPON INDIA SILVER ETF FOF-DIRECT-GROWTH",
+      "transactionParticulars": "BSEDR SE:1110152526217 CM:6699 1208870000000022 00677591",
+      "date": "16-02-2026",
+      "openingBalance": 1187.182,
+      "credit": null,
+      "debit": 404.24,
+      "closingBalance": 782.942,
+      "stampDuty": 0
+    }
+  ]
+}

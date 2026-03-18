@@ -100,5 +100,5 @@ Example shape:
 ```bash
 curl -X POST "http://localhost:5001/api/upload-cas" \
   -F "file=@/absolute/path/to/statement.pdf" \
-  -F "password=ABCDE7236F"
+  -F "password=FIEPP9428Q"
 ```
