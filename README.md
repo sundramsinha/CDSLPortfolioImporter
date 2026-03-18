@@ -86,3 +86,36 @@ curl -X POST "http://localhost:5001/api/upload-cas" \
   -F "file=@/absolute/path/to/statement.pdf" \
   -F "password=YOUR_PDF_PASSWORD"
 ```
+
+## UI Screenshots And Demo Video
+
+### Upload View
+
+![Upload View](docs/media/ui-upload.png)
+
+### Key Insights View
+
+![Key Insights View](docs/media/ui-insights.png)
+
+### Key Insights View (Expanded)
+
+![Key Insights View Expanded](docs/media/ui-insights-expanded.png)
+
+### Key Insights View (Metrics)
+
+![Key Insights View Metrics](docs/media/ui-insights-metrics.png)
+
+### Key Insights View (Redacted)
+
+![Key Insights View Redacted](docs/media/ui-insights-redacted.png)
+
+### Client Summary View
+
+![Client Summary View](docs/media/ui-client-summary.png)
+
+Add remaining screenshots/video under `docs/media/` using these names:
+
+- `ui-rm-prep.png`
+- `cas-importer-demo.mp4`
+
+Then update this section with markdown embeds/links.
