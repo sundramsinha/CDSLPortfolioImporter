@@ -6,6 +6,8 @@ function parseCasPortfolio(text) {
       transactions: [],
       dematTransactions: [],
       statementSummary: null,
+      assetClassBreakup: null,
+      consolidatedPortfolioSummary: null,
       yearlyValuation: [],
       accountDetails: null
     };
@@ -15,8 +17,12 @@ function parseCasPortfolio(text) {
   const mutualFundHoldings = dedupeMutualHoldings(parseCdslCasMutualHoldings(compactText));
   const dematHoldings = dedupeDematHoldings(parseCdslDematHoldings(compactText));
   const transactions = dedupeTransactions(parseCdslMutualFundTransactions(text));
-  const dematTransactions = dedupeDematTransactions(parseCdslDematTransactions(text));
+  const dematTransactions = dedupeDematTransactions(
+    applyDematTransactionCarryForward(parseCdslDematTransactions(text))
+  );
   const statementSummary = parseCdslStatementSummary(compactText);
+  const assetClassBreakup = parseCdslAssetClassBreakup(compactText);
+  const consolidatedPortfolioSummary = parseCdslConsolidatedPortfolioSummary(compactText);
   const yearlyValuation = parseCdslYearlyValuation(compactText);
   const accountDetails = parseCdslAccountDetails(compactText);
 
@@ -27,6 +33,8 @@ function parseCasPortfolio(text) {
       transactions,
       dematTransactions,
       statementSummary,
+      assetClassBreakup,
+      consolidatedPortfolioSummary,
       yearlyValuation,
       accountDetails
     };
@@ -68,8 +76,121 @@ function parseCasPortfolio(text) {
     transactions: [],
     dematTransactions: [],
     statementSummary,
+    assetClassBreakup,
+    consolidatedPortfolioSummary,
     yearlyValuation,
     accountDetails
+  };
+}
+
+function parseCdslConsolidatedPortfolioSummary(compactText) {
+  const start = compactText.search(/Your Demat Account and Mutual Fund Folios/i);
+  if (start < 0) return null;
+
+  const tail = compactText.slice(start);
+  const endRelative = tail.search(
+    /Consolidated Portfolio Valuation for Year|Summary of Investments|MUTUAL FUND UNITS HELD WITH MF\/RTA/i
+  );
+  const section = endRelative > 0 ? tail.slice(0, endRelative) : tail.slice(0, 2200);
+  const normalizedSection = normalize(section);
+  if (!/Account Type\s+Account Details\s+No\. of ISINs\/ Schemes\s+Value in/i.test(normalizedSection)) {
+    return null;
+  }
+
+  const holderMatch = normalizedSection.match(/In the single name of\s+(.+?)\s+\(\s*PAN\s*:\s*([A-Z0-9]+)\s*\)/i);
+  const holderName = holderMatch ? normalize(holderMatch[1]) : null;
+  const pan = holderMatch ? normalize(holderMatch[2]).toUpperCase() : null;
+
+  const rows = [];
+  const accountRowRegex =
+    /(CDSL Demat Account|NSDL Demat Account)\s+(.+?)\s+([0-9]+)\s+([0-9,]+(?:\.[0-9]+)?)(?=\s+(?:CDSL Demat Account|NSDL Demat Account|Mutual Fund Folios|Total|Grand Total)\b)/gi;
+  let accountMatch;
+  while ((accountMatch = accountRowRegex.exec(normalizedSection)) !== null) {
+    rows.push({
+      accountType: normalize(accountMatch[1]),
+      accountDetails: normalize(accountMatch[2]),
+      schemesCount: toNumber(accountMatch[3]),
+      value: toNumber(accountMatch[4])
+    });
+  }
+
+  const mfRowMatch = normalizedSection.match(
+    /Mutual Fund Folios\s+([0-9]+)\s+Folios\s+([0-9]+)\s+([0-9,]+(?:\.[0-9]+)?)(?=\s+(?:Total|Grand Total)\b)/i
+  );
+  if (mfRowMatch) {
+    rows.push({
+      accountType: "Mutual Fund Folios",
+      accountDetails: `${normalize(mfRowMatch[1])} Folios`,
+      schemesCount: toNumber(mfRowMatch[2]),
+      value: toNumber(mfRowMatch[3])
+    });
+  } else {
+    const mfSimpleMatch = normalizedSection.match(
+      /Mutual Fund Folios\s+([0-9]+)\s+([0-9,]+(?:\.[0-9]+)?)(?=\s+(?:Total|Grand Total)\b)/i
+    );
+    if (mfSimpleMatch) {
+      rows.push({
+        accountType: "Mutual Fund Folios",
+        accountDetails: `${normalize(mfSimpleMatch[1])} Folios`,
+        schemesCount: toNumber(mfSimpleMatch[1]),
+        value: toNumber(mfSimpleMatch[2])
+      });
+    }
+  }
+
+  const totalMatch = normalizedSection.match(/\bTotal\s+([0-9,]+(?:\.[0-9]+)?)/i);
+  const grandTotalMatch = normalizedSection.match(/\bGrand Total\s+([0-9,]+(?:\.[0-9]+)?)/i);
+  const totalValue = totalMatch ? toNumber(totalMatch[1]) : null;
+  const grandTotalValue = grandTotalMatch ? toNumber(grandTotalMatch[1]) : null;
+
+  if (!rows.length && totalValue === null && grandTotalValue === null) return null;
+
+  return {
+    holderName,
+    pan,
+    rows,
+    totalValue,
+    grandTotalValue
+  };
+}
+
+function parseCdslAssetClassBreakup(compactText) {
+  const sectionMatch = compactText.match(
+    /Asset Class\s+Value\s+Percentage\s+(.{0,600}?)\s+Total\s+([0-9,]+(?:\.[0-9]+)?)\s+([0-9]+(?:\.[0-9]+)?)/i
+  );
+  if (!sectionMatch) return null;
+
+  const body = normalize(sectionMatch[1]);
+  const totalPortfolioValue = toNumber(sectionMatch[2]);
+  const totalPercentage = toNumber(sectionMatch[3]);
+  const rows = [
+    parseAssetClassRow(body, "Equity", "equity"),
+    parseAssetClassRow(body, "Mutual Fund Folios", "mutualFundFolios"),
+    parseAssetClassRow(body, "Mutual Funds Held in Demat Form", "mutualFundsHeldInDematForm")
+  ].filter(Boolean);
+
+  if (!rows.length && totalPortfolioValue === null) return null;
+
+  return {
+    rows,
+    totalPortfolioValue,
+    totalPercentage
+  };
+}
+
+function parseAssetClassRow(sectionBody, label, key) {
+  const regex = new RegExp(
+    `${escapeRegex(label)}\\s+([0-9,]+(?:\\.[0-9]+)?)\\s+([0-9]+(?:\\.[0-9]+)?)`,
+    "i"
+  );
+  const match = sectionBody.match(regex);
+  if (!match) return null;
+
+  return {
+    key,
+    label,
+    value: toNumber(match[1]),
+    percentage: toNumber(match[2])
   };
 }
 
@@ -273,6 +394,7 @@ function parseCdslStatementSummary(compactText) {
   const summarySection = getSummarySection(compactText);
   const hasSummarySection = /summary of investments/i.test(compactText);
   const tableValues = extractSummaryTableValues(summarySection);
+  const entries = extractSummaryEntries(summarySection);
   const cdslDemat =
     tableValues?.cdslDematAccounts || extractSummaryValue(summarySection, "CDSL Demat Accounts");
   const nsdlDemat =
@@ -302,6 +424,7 @@ function parseCdslStatementSummary(compactText) {
       mutualFundFolios: mutualFundFolios.value,
       totalPortfolioValue: totalPortfolio.value
     },
+    entries,
     rawTokens: {
       cdslDematAccounts: cdslDemat.raw,
       nsdlDematAccounts: nsdlDemat.raw,
@@ -320,17 +443,84 @@ function getSummarySection(compactText) {
 }
 
 function extractSummaryTableValues(summarySection) {
-  const tableRegex =
-    /CDSL Demat Accounts\s+NSDL Demat Accounts\*?\s+Mutual Fund Folios\s+(N\.?A\.?|--|[0-9,]+(?:\.[0-9]+)?)\s+(N\.?A\.?|--|[0-9,]+(?:\.[0-9]+)?)\s+(N\.?A\.?|--|[0-9,]+(?:\.[0-9]+)?)\s+Total Portfolio Value\s+(N\.?A\.?|--|[0-9,]+(?:\.[0-9]+)?)/i;
-  const match = summarySection.match(tableRegex);
-  if (!match) return null;
+  const valueToken = "(N\\.?A\\.?|--|[0-9,]+(?:\\.[0-9]+)?)";
+  const labelBlock = "CDSL Demat Accounts\\s+NSDL Demat Accounts\\s*\\*?\\s+Mutual Fund Folios";
+  const strictTableRegex = new RegExp(
+    `${labelBlock}\\s+${valueToken}\\s+${valueToken}\\s+${valueToken}(?:\\s+Click Here)?\\s+Total Portfolio Value\\s+${valueToken}`,
+    "i"
+  );
+  const strictMatch = summarySection.match(strictTableRegex);
+  if (strictMatch) {
+    return {
+      cdslDematAccounts: tokenToSummaryValue(strictMatch[1]),
+      nsdlDematAccounts: tokenToSummaryValue(strictMatch[2]),
+      mutualFundFolios: tokenToSummaryValue(strictMatch[3]),
+      totalPortfolioValue: tokenToSummaryValue(strictMatch[4])
+    };
+  }
+
+  const relaxedRegex = new RegExp(
+    `${labelBlock}\\s+(.{0,260}?)\\s+Total Portfolio Value\\s+${valueToken}`,
+    "i"
+  );
+  const relaxedMatch = summarySection.match(relaxedRegex);
+  if (!relaxedMatch) return null;
+  const tokens = (relaxedMatch[1].match(new RegExp(valueToken, "gi")) || []).slice(0, 3);
+  if (tokens.length < 3) return null;
 
   return {
-    cdslDematAccounts: tokenToSummaryValue(match[1]),
-    nsdlDematAccounts: tokenToSummaryValue(match[2]),
-    mutualFundFolios: tokenToSummaryValue(match[3]),
-    totalPortfolioValue: tokenToSummaryValue(match[4])
+    cdslDematAccounts: tokenToSummaryValue(tokens[0]),
+    nsdlDematAccounts: tokenToSummaryValue(tokens[1]),
+    mutualFundFolios: tokenToSummaryValue(tokens[2]),
+    totalPortfolioValue: tokenToSummaryValue(relaxedMatch[2])
   };
+}
+
+function extractSummaryEntries(summarySection) {
+  const section = normalize(summarySection);
+  if (!section) return [];
+
+  const valueToken = "(N\\.?A\\.?|--|[0-9,]+(?:\\.[0-9]+)?)";
+  const entryRegex = new RegExp(
+    `([A-Za-z][A-Za-z .,'&\\/-]{2,}?)\\s+CDSL Demat Accounts\\s+NSDL Demat Accounts\\s*\\*?\\s+Mutual Fund Folios\\s+${valueToken}\\s+${valueToken}\\s+${valueToken}(?:\\s+Click Here)?`,
+    "gi"
+  );
+
+  const output = [];
+  const seen = new Set();
+  let match;
+  while ((match = entryRegex.exec(section)) !== null) {
+    const holderName = cleanSummaryHolderName(match[1]);
+    const cdslDemat = tokenToSummaryValue(match[2]);
+    const nsdlDemat = tokenToSummaryValue(match[3]);
+    const mutualFundFolios = tokenToSummaryValue(match[4]);
+    const dedupeKey = `${holderName}|${cdslDemat.raw}|${nsdlDemat.raw}|${mutualFundFolios.raw}`;
+    if (!holderName || seen.has(dedupeKey)) continue;
+    seen.add(dedupeKey);
+
+    output.push({
+      holderName,
+      values: {
+        cdslDematAccounts: cdslDemat.value,
+        nsdlDematAccounts: nsdlDemat.value,
+        mutualFundFolios: mutualFundFolios.value
+      },
+      rawTokens: {
+        cdslDematAccounts: cdslDemat.raw,
+        nsdlDematAccounts: nsdlDemat.raw,
+        mutualFundFolios: mutualFundFolios.raw
+      }
+    });
+  }
+  return output;
+}
+
+function cleanSummaryHolderName(value) {
+  return normalize(value)
+    .replace(/^View Statement\s+/i, "")
+    .replace(/^Name\/Joint Name\s*\(s\)\s*/i, "")
+    .replace(/\s+Portfolio Valuation.*$/i, "")
+    .trim();
 }
 
 function extractSummaryValue(compactText, label) {
@@ -468,60 +658,107 @@ function parseCdslCasMutualHoldings(compactText) {
 }
 
 function parseCdslDematHoldings(compactText) {
+  const sections = extractDematHoldingSections(compactText);
+  if (!sections.length) return [];
+  const holdings = [];
+  for (const section of sections) {
+    const rows = parseDematHoldingRows(section.text, section.accountKey);
+    for (const row of rows) holdings.push(row);
+  }
+  return holdings;
+}
+
+function extractDematHoldingSections(compactText) {
+  const sections = [];
+  const blockRegex = /HOLDING STATEMENT AS ON\s+[0-9]{2}-[0-9]{2}-[0-9]{4}/gi;
+  let blockMatch;
+  let accountIndex = 0;
+  while ((blockMatch = blockRegex.exec(compactText)) !== null) {
+    const tail = compactText.slice(blockMatch.index);
+    const tableStartRelative = tail.search(/ISIN\s+Security\s+Current Bal\s+Frozen Bal/i);
+    if (tableStartRelative < 0) continue;
+    const rowsStart = blockMatch.index + tableStartRelative;
+    const rowsTail = compactText.slice(rowsStart);
+    const tableEndRelative = rowsTail.search(/Portfolio Value\s*`?\s*[0-9,]+\.[0-9]+/i);
+    if (tableEndRelative < 0) continue;
+    const section = normalize(rowsTail.slice(0, tableEndRelative));
+    if (!section) continue;
+    accountIndex += 1;
+    sections.push({ text: section, accountKey: `dp-${accountIndex}` });
+  }
+
+  if (sections.length) return sections;
   const start = compactText.search(/ISIN\s+Security\s+Current Bal\s+Frozen Bal/i);
   if (start < 0) return [];
+  return [{ text: compactText.slice(start), accountKey: "dp-1" }];
+}
 
-  const endRelative = compactText.slice(start).search(/Portfolio Value\s*`?\s*[0-9,]+\.[0-9]+/i);
-  const section =
-    endRelative >= 0 ? compactText.slice(start, start + endRelative) : compactText.slice(start);
-
+function parseDematHoldingRows(section, accountKey = "dp-1") {
   const holdings = [];
-  const rowBlockRegex = /\b(INE[0-9A-Z]{9,10})\b([\s\S]*?)(?=\bINE[0-9A-Z]{9,10}\b|$)/gi;
+  const rowBlockRegex = /\b(IN[EF][0-9A-Z]{9,10})\b([\s\S]*?)(?=\bIN[EF][0-9A-Z]{9,10}\b|$)/gi;
   let blockMatch;
   while ((blockMatch = rowBlockRegex.exec(section)) !== null) {
     const isin = normalize(blockMatch[1]);
     const blockText = normalize(blockMatch[2]);
     if (!isin || !blockText) continue;
-
     const tailMatch = blockText.match(
-      /^(.+?)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+([0-9,]*\.?[0-9]+)\s+([0-9,]*\.?[0-9]+)$/
+      /^(.+?)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+(--|[0-9,]*\.?[0-9]+)\s+([0-9,]*\.?[0-9]+)\s+([0-9,]*\.?[0-9]+)(?:\s|$)/
     );
     if (!tailMatch) continue;
 
-    const securityName = cleanDematSecurityName(tailMatch[1]);
+    const securityName = cleanDematSecurityName(tailMatch[1], isin);
+    const inferredAmc = inferInfDematAmcName(securityName, isin);
     const currentBalanceToken = normalize(tailMatch[2]);
-    const quantity = toNumber(tailMatch[2]);
     const freeBalance = toNumber(tailMatch[6]);
     const marketPrice = toNumber(tailMatch[7]);
     const value = toNumber(tailMatch[8]);
+    const quantity =
+      toNumber(tailMatch[2]) ??
+      freeBalance ??
+      (currentBalanceToken === "--" && value !== null && value === 0 ? 0 : null);
 
-    // Strict rule requested: include only rows where Current Bal is present.
-    if (!securityName || currentBalanceToken === "--" || quantity === null || quantity <= 0) continue;
-    if (marketPrice === null || value === null || value <= 0) continue;
+    if (!securityName || !isin) continue;
+    if (quantity === null || quantity < 0) continue;
+    if (marketPrice === null || value === null || value < 0) continue;
 
     holdings.push({
       isin,
       security_name: securityName,
+      amc: inferredAmc,
+      account_key: accountKey,
       quantity,
       free_balance: freeBalance,
       market_price: marketPrice,
       value
     });
   }
-
   return holdings;
 }
 
-function cleanDematSecurityName(rawSecurityName) {
-  let name = normalize(rawSecurityName).replace(/#/g, "");
+function cleanDematSecurityName(rawSecurityName, isin = "") {
+  const isInfIsin = /^INF/i.test(String(isin || ""));
+  let name = normalize(rawSecurityName);
+  if (!isInfIsin) {
+    name = name.replace(/#/g, "");
+  }
   if (!name) return "";
 
-  // OCR/text merge can append zero-balance rows into the current security text.
-  // Keep only the first clean security segment.
-  name = name.split(/\bINE[0-9A-Z]{9,10}\b/i)[0];
+  name = name.split(/\bIN[EF][0-9A-Z]{9,10}\b/i)[0];
+  name = name.split(/\bISIN\b/i)[0];
   name = name.replace(/\s+--\s+--\s+--\s+--\s+--.*$/i, "");
 
   return normalize(name);
+}
+
+function inferInfDematAmcName(securityName, isin) {
+  if (!/^INF/i.test(String(isin || ""))) return null;
+  const text = normalize(securityName);
+  if (!text) return null;
+  const hashPrefix = normalize(text.split("#")[0]);
+  if (hashPrefix) return hashPrefix;
+  const mfSplit = text.split(/\bMF\b/i);
+  const mfPrefix = normalize(mfSplit[0]);
+  return mfPrefix || null;
 }
 
 function parseCdslMutualFundTransactions(text) {
@@ -597,6 +834,9 @@ function parseCdslMutualFundTransactions(text) {
 }
 
 function parseCdslDematTransactions(text) {
+  const compactBlockRows = parseCdslDematTransactionsFromCompactBlocks(text);
+  if (compactBlockRows.length) return compactBlockRows;
+
   const lines = String(text || "")
     .replace(/\r/g, "\n")
     .split("\n")
@@ -634,8 +874,10 @@ function parseCdslDematTransactions(text) {
   let buffer = "";
   let lastIsin = "";
   let lastSecurity = "";
+  const dematNoiseRegex =
+    /(Central Depository Services|CONSOLIDATED ACCOUNT STATEMENT|Summary of Investments|Account Details|MF Details|Notes|About CDSL|HOLDING STATEMENT AS ON|ISIN\s+Security\s+Current Bal|STATEMENT OF TRANSACTIONS FOR THE PERIOD|BO ID\s*:|DP Name\s*:)/i;
   const rowRegex =
-    /^(?:(INE[0-9A-Z]{9,10})\s+)?(.+?)\s+([0-9]{2}-[0-9]{2}-[0-9]{4})\s+((?:-?(?:[0-9,]+(?:\.[0-9]+)?|\.[0-9]+)|--)(?:\s+(?:-?(?:[0-9,]+(?:\.[0-9]+)?|\.[0-9]+)|--)){3,4})$/;
+    /^(?:(IN[EF][0-9A-Z]{9,10})\s+)?(.+?)\s+([0-9]{2}-[0-9]{2}-[0-9]{4})\s+((?:-?(?:[0-9,]+(?:\.[0-9]+)?|\.[0-9]+)|--)(?:\s+(?:-?(?:[0-9,]+(?:\.[0-9]+)?|\.[0-9]+)|--)){3,4})$/;
 
   const flushBuffer = () => {
     const rowText = normalize(buffer);
@@ -643,16 +885,24 @@ function parseCdslDematTransactions(text) {
       buffer = "";
       return;
     }
+    if (dematNoiseRegex.test(rowText)) {
+      buffer = "";
+      return;
+    }
     const rowMatch = rowText.match(rowRegex);
-    if (!rowMatch) return;
+    if (!rowMatch) {
+      buffer = "";
+      return;
+    }
 
     const isin = normalize(rowMatch[1]) || lastIsin;
-    const preDateText = normalize(rowMatch[2]);
+    const preDateText = selectDematPreDateContext(rowMatch[2]);
     const date = normalize(rowMatch[3]);
     const { openingBalance, credit, debit, closingBalance, stampDuty } = parseDematNumericTail(rowMatch[4]);
     const { security, transactionParticulars } = splitDematPreDateText(preDateText, lastSecurity);
 
     if (!isin || !date || !security) return;
+    if (isLikelyNoiseDematSecurity(security)) return;
 
     transactions.push({
       isin,
@@ -673,7 +923,7 @@ function parseCdslDematTransactions(text) {
   for (const line of sectionLines) {
     if (noiseLineRegex.test(line)) continue;
 
-    if (buffer && /^INE[0-9A-Z]{9,10}\b/.test(line)) {
+    if (buffer && /^IN[EF][0-9A-Z]{9,10}\b/.test(line)) {
       flushBuffer();
     }
 
@@ -684,17 +934,56 @@ function parseCdslDematTransactions(text) {
   }
   flushBuffer();
   const compactFallback = parseCdslDematTransactionsFromCompactSection(compactSection);
-  return compactFallback.length > transactions.length ? compactFallback : transactions;
+  return pickBestDematTransactions(transactions, compactFallback);
+}
+
+function parseCdslDematTransactionsFromCompactBlocks(text) {
+  const compactText = normalize(text);
+  if (!compactText) return [];
+
+  const startMarker = /STATEMENT OF TRANSACTIONS FOR THE PERIOD/gi;
+  const startIndexes = [];
+  let startMatch;
+  while ((startMatch = startMarker.exec(compactText)) !== null) {
+    startIndexes.push(startMatch.index);
+  }
+  if (!startIndexes.length) return [];
+
+  const rows = [];
+  for (let i = 0; i < startIndexes.length; i += 1) {
+    const start = startIndexes[i];
+    const end = i + 1 < startIndexes.length ? startIndexes[i + 1] : compactText.length;
+    const block = normalize(compactText.slice(start, end));
+    if (!block) continue;
+    if (/No Transaction during the period/i.test(block)) continue;
+    if (!/ISIN\s+Security\s+Transaction Particulars\s+Date/i.test(block)) continue;
+    const blockRows = parseCdslDematTransactionsFromCompactSection(block);
+    for (const row of blockRows) rows.push(row);
+  }
+
+  return rows;
 }
 
 function splitDematPreDateText(preDateText, lastSecurity = "") {
   const text = normalize(preDateText);
   const markerMatch = text.match(
-    /\b(EP-[A-Z]{2}|CA-[A-Za-z]+|PAYOUT-[A-Z]{2}|Txn:|Cr Current Balance|Db Current Balance)\b/i
+    /\b(EP-[A-Z]{2}|CA-[A-Za-z]+|PAYOUT-[A-Z]{2}|Txn:|Cr Current Balance|Db Current Balance|BSEDR|NSEDR|INTDEP)\b/i
   );
   if (!markerMatch) return { security: text || normalize(lastSecurity), transactionParticulars: "" };
 
   const idx = markerMatch.index || 0;
+  const leading = normalize(text.slice(0, idx));
+  const leadingLooksLikeHeaderNoise =
+    !leading ||
+    /(ISIN\s+Security|Transaction Particulars|Date\s+Op\.?\s*Bal|Summary of Investments|Account Details|About CDSL|Central Depository Services)/i.test(
+      leading
+    );
+  if (leadingLooksLikeHeaderNoise) {
+    return {
+      security: normalize(lastSecurity),
+      transactionParticulars: normalize(text.slice(idx))
+    };
+  }
   if (idx === 0) {
     return {
       security: normalize(lastSecurity),
@@ -714,6 +1003,8 @@ function parseCdslDematTransactionsFromCompactSection(section) {
   const output = [];
   let lastIsin = "";
   let lastSecurity = "";
+  const dematNoiseRegex =
+    /(Central Depository Services|CONSOLIDATED ACCOUNT STATEMENT|Summary of Investments|Account Details|MF Details|Notes|About CDSL|HOLDING STATEMENT AS ON|ISIN\s+Security\s+Current Bal|STATEMENT OF TRANSACTIONS FOR THE PERIOD|BO ID\s*:|DP Name\s*:)/i;
   const rowTailRegex =
     /([0-9]{2}-[0-9]{2}-[0-9]{4})\s+((?:-?(?:[0-9,]+(?:\.[0-9]+)?|\.[0-9]+)|--)(?:\s+(?:-?(?:[0-9,]+(?:\.[0-9]+)?|\.[0-9]+)|--)){3,4})/g;
 
@@ -722,13 +1013,10 @@ function parseCdslDematTransactionsFromCompactSection(section) {
   while ((match = rowTailRegex.exec(text)) !== null) {
     let preDateText = normalize(text.slice(cursor, match.index));
     cursor = rowTailRegex.lastIndex;
+    preDateText = selectDematPreDateContext(preDateText);
+    if (!preDateText || dematNoiseRegex.test(preDateText)) continue;
 
-    const firstIsinPos = preDateText.search(/\bINE[0-9A-Z]{9,10}\b/i);
-    if (firstIsinPos > 0) {
-      preDateText = normalize(preDateText.slice(firstIsinPos));
-    }
-
-    const isinPrefixMatch = preDateText.match(/^(INE[0-9A-Z]{9,10})\s+(.+)$/i);
+    const isinPrefixMatch = preDateText.match(/^(IN[EF][0-9A-Z]{9,10})\s+(.+)$/i);
     const isin = isinPrefixMatch ? normalize(isinPrefixMatch[1]) : lastIsin;
     const detailsText = isinPrefixMatch ? normalize(isinPrefixMatch[2]) : preDateText;
 
@@ -737,6 +1025,7 @@ function parseCdslDematTransactionsFromCompactSection(section) {
     const { security, transactionParticulars } = splitDematPreDateText(detailsText, lastSecurity);
 
     if (!isin || !date || !security) continue;
+    if (isLikelyNoiseDematSecurity(security)) continue;
 
     output.push({
       isin,
@@ -754,6 +1043,100 @@ function parseCdslDematTransactionsFromCompactSection(section) {
   }
 
   return output;
+}
+
+function selectDematPreDateContext(rawText) {
+  let text = sanitizeDematPreDateText(rawText);
+  if (!text) return "";
+
+  if (/STATEMENT OF TRANSACTIONS FOR THE PERIOD/i.test(text)) {
+    const firstIsinPos = text.search(/\bIN[EF][0-9A-Z]{9,10}\b/i);
+    if (firstIsinPos >= 0) {
+      text = normalize(text.slice(firstIsinPos));
+    } else {
+      const firstTxnPos = text.search(
+        /\b(BSEDR|NSEDR|INTDEP|EP-[A-Z]{2}|CA-[A-Za-z]+|PAYOUT-[A-Z]{2}|Txn:)\b/i
+      );
+      if (firstTxnPos >= 0) text = normalize(text.slice(firstTxnPos));
+    }
+  }
+
+  const isinMatches = [...text.matchAll(/\bIN[EF][0-9A-Z]{9,10}\b/gi)];
+  if (isinMatches.length > 1) {
+    const lastMatch = isinMatches[isinMatches.length - 1];
+    const leading = normalize(text.slice(0, lastMatch.index));
+    const leadingHasTxnContext = /\b(BSEDR|NSEDR|INTDEP|EP-[A-Z]{2}|CA-[A-Za-z]+|PAYOUT-[A-Z]{2}|Txn:)\b/i.test(
+      leading
+    );
+    if (!leadingHasTxnContext) {
+      text = normalize(text.slice(lastMatch.index));
+    }
+  }
+
+  return text;
+}
+
+function sanitizeDematPreDateText(value) {
+  let text = normalize(value);
+  if (!text) return "";
+  const removablePatterns = [
+    /Central Depository Services\s*\(India\)\s*Limited/gi,
+    /CONSOLIDATED ACCOUNT STATEMENT/gi,
+    /Summary of Investments/gi,
+    /Account Details/gi,
+    /MF Details/gi,
+    /Notes/gi,
+    /About CDSL/gi,
+    /HOLDING STATEMENT AS ON/gi,
+    /ISIN\s+ISIN\s+Security/gi,
+    /ISIN\s+Security\s+Transaction Particulars/gi,
+    /Transaction Particulars\s+Date\s+Op\.?\s*Bal/gi,
+    /Stamp Duty\s*\(?`?\)?/gi,
+    /BO ID\s*:\s*[0-9]+/gi
+  ];
+  for (const pattern of removablePatterns) {
+    text = text.replace(pattern, " ");
+  }
+  return normalize(text);
+}
+
+function isLikelyNoiseDematSecurity(security) {
+  const text = normalize(security);
+  if (!text) return true;
+  if (text.length > 260) return true;
+  if (
+    /(Central Depository Services|Summary of Investments|Account Details|ISIN\s+Security|HOLDING STATEMENT AS ON|MF Details|About CDSL)/i.test(
+      text
+    )
+  ) {
+    return true;
+  }
+  const isinMatches = text.match(/\bIN[EF][0-9A-Z]{9,10}\b/gi);
+  if (isinMatches && isinMatches.length > 1) return true;
+  return false;
+}
+
+function pickBestDematTransactions(primaryRows, fallbackRows) {
+  const primaryScore = scoreDematTransactions(primaryRows);
+  const fallbackScore = scoreDematTransactions(fallbackRows);
+  if (fallbackScore > primaryScore) return fallbackRows;
+  return primaryRows;
+}
+
+function scoreDematTransactions(rows) {
+  if (!Array.isArray(rows) || !rows.length) return 0;
+  let score = 0;
+  for (const row of rows) {
+    const isinOk = /^IN[EF][0-9A-Z]{9,10}$/i.test(String(row?.isin || "").trim());
+    const dateOk = /^[0-9]{2}-[0-9]{2}-[0-9]{4}$/.test(String(row?.date || "").trim());
+    const security = normalize(row?.security);
+    const tx = normalize(row?.transactionParticulars);
+    if (isinOk) score += 2;
+    if (dateOk) score += 2;
+    if (security && security.length <= 140 && !isLikelyNoiseDematSecurity(security)) score += 2;
+    if (tx) score += 1;
+  }
+  return score;
 }
 
 function toNumberOrNull(value) {
@@ -1059,7 +1442,7 @@ function dedupeDematHoldings(holdings) {
   const output = [];
 
   for (const item of holdings) {
-    const key = `${item.isin}|${item.security_name}|${item.quantity}|${item.value}`;
+    const key = `${item.account_key || ""}|${item.isin}|${item.security_name}|${item.quantity}|${item.value}`;
     if (seen.has(key)) continue;
     seen.add(key);
     output.push(item);
@@ -1091,6 +1474,25 @@ function dedupeDematTransactions(transactions) {
     output.push(item);
   }
   return output;
+}
+
+function applyDematTransactionCarryForward(rows) {
+  if (!Array.isArray(rows) || !rows.length) return [];
+  let lastIsin = "";
+  let lastSecurity = "";
+  return rows.map((row) => {
+    const normalizedIsin = normalize(row?.isin);
+    const normalizedSecurity = normalize(row?.security);
+    const nextIsin = normalizedIsin || lastIsin;
+    const nextSecurity = normalizedSecurity || lastSecurity;
+    if (nextIsin) lastIsin = nextIsin;
+    if (nextSecurity) lastSecurity = nextSecurity;
+    return {
+      ...row,
+      isin: nextIsin || null,
+      security: nextSecurity || null
+    };
+  });
 }
 
 module.exports = {

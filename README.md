@@ -1,104 +1,88 @@
 # CAS Importer
 
-Full-stack CAS parser for CDSL statements. Upload PDF statements (including password-protected files) and extract:
+Full-stack CAS parser + analytics workspace for CDSL statements.
 
-- Mutual fund holdings
-- Demat holdings
-- Mutual fund transactions
-- Demat transactions
-- Statement summary, yearly valuation, and account details
+Upload PDF statements (including password-protected files) and get:
 
-Deterministic regex/rule-based parsing only (no AI extraction).
+- Mutual fund holdings and transactions
+- Demat holdings and transactions
+- Consolidated summary, asset class breakup, yearly valuation
+- AI-powered **Client Summary** (analytics-oriented)
+- AI-powered **RM Meeting Prep**
 
-## Folder Structure
+## Project Structure
 
-- `backend/` - Express API + parsing services
-- `frontend/` - React dashboard UI
-- `backend/data/reports/` - persisted parsed JSON reports
+- `cas-importer/backend/` - Express API + parser + AI services
+- `cas-importer/frontend/` - React dashboard
+- `cas-importer/backend/data/reports/` - saved parsed JSON reports
 
-## Run Backend
+## Quick Start
+
+### 1) Backend
 
 ```bash
-cd backend
+cd cas-importer/backend
 npm install
-PORT=5001 node server.js
+cp .env.example .env
+node server.js
 ```
 
-Backend default is `5001` and frontend proxy is configured to `5001`.
+Backend runs on `http://localhost:5001` by default.
 
-## Run Frontend
+### 2) Frontend
 
 ```bash
-cd frontend
+cd cas-importer/frontend
 npm install
 npm start
 ```
 
-Frontend dev server runs on `3000` (or next available port such as `3001` if occupied).
+Frontend runs on `3000` (or next available port).
+
+## Environment Variables (Safe For Git)
+
+Use `cas-importer/backend/.env.example` as template:
+
+```bash
+OPENAI_API_KEY=your_openai_api_key_here
+OPENAI_CLIENT_SUMMARY_MODEL=gpt-4.1-mini
+OPENAI_RM_PREP_MODEL=gpt-4.1-mini
+PORT=5001
+```
+
+Notes:
+
+- Keep your real key only in local `cas-importer/backend/.env`.
+- `.env` is git-ignored, so it will not be pushed.
+- Teammates can clone, copy `.env.example` -> `.env`, add their key, and run immediately.
 
 ## API
 
 ### `POST /api/upload-cas`
 
-Form-data fields:
+Form-data:
 
 - `file` (required) - CAS PDF
-- `password` (optional) - PDF password, must be uppercase
+- `password` (optional) - PDF password (uppercase recommended)
 
-Response includes:
-
-- `portfolio` (backward-compatible alias of `mutualFundHoldings`)
-- `mutualFundHoldings`
-- `dematHoldings`
-- `transactions` (mutual fund transactions)
-- `dematTransactions`
-- `summary`
-- `statementSummary`
-- `yearlyValuation`
-- `accountDetails`
-- `report` metadata (`reportId`, `filename`, fetch/download URLs)
-
-Example shape:
-
-```json
-{
-  "mutualFundHoldings": [],
-  "dematHoldings": [],
-  "transactions": [],
-  "dematTransactions": [],
-  "summary": {
-    "totalMutualFunds": 0,
-    "totalDematSecurities": 0,
-    "totalTransactions": 0,
-    "totalMutualFundValue": 0,
-    "totalDematValue": 0,
-    "totalPortfolioValue": 0,
-    "allocation": {
-      "mutualFundPercentage": 0,
-      "dematPercentage": 0
-    },
-    "statementSummary": null,
-    "yearlyValuation": [],
-    "accountDetails": null
-  },
-  "report": {
-    "reportId": "2026-03-16-<uuid>",
-    "filename": "2026-03-16-<uuid>.json",
-    "fetchUrl": "/api/reports/<id>",
-    "downloadUrl": "/api/reports/<id>/download"
-  }
-}
-```
+Returns parsed portfolio JSON including holdings, transactions, and summary blocks.
 
 ### Saved Report APIs
 
 - `GET /api/reports/:reportId` - fetch saved parsed JSON
-- `GET /api/reports/:reportId/download` - download saved JSON file
+- `GET /api/reports/:reportId/download` - download saved JSON
+
+### AI APIs
+
+- `POST /api/reports/:reportId/client-summary`
+  - Generates client-facing summary with analytics + actions
+- `POST /api/reports/:reportId/rm-meeting-prep`
+  - Generates RM agenda, questions, objection handling, and checklist
 
 ## Example Curl
 
 ```bash
 curl -X POST "http://localhost:5001/api/upload-cas" \
   -F "file=@/absolute/path/to/statement.pdf" \
-  -F "password=FIEPP9428Q"
+  -F "password=YOUR_PDF_PASSWORD"
 ```

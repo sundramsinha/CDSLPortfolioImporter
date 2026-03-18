@@ -4,6 +4,8 @@ const path = require("path");
 const { readPdfText } = require("../services/pdfReader");
 const { cleanCasText } = require("../utils/textCleaner");
 const { parseCasPortfolio } = require("../services/casParser");
+const { buildAiClientFriendlySummary } = require("../services/aiClientSummary");
+const { buildAiRmMeetingPrep } = require("../services/aiRmMeetingPrep");
 const { saveParsedReport, readParsedReport } = require("../services/reportStore");
 
 const router = express.Router();
@@ -141,6 +143,40 @@ router.get("/reports/:reportId/download", async (req, res, next) => {
       `attachment; filename="${path.basename(report.filename)}"`
     );
     return res.send(JSON.stringify(report.data, null, 2));
+  } catch (error) {
+    if (error?.code === "ENOENT") {
+      return res.status(404).json({ error: "Report not found." });
+    }
+    return next(error);
+  }
+});
+
+router.post("/reports/:reportId/client-summary", async (req, res, next) => {
+  try {
+    const report = await readParsedReport(req.params.reportId);
+    const context = typeof req.body === "object" && req.body ? req.body : {};
+    const summary = await buildAiClientFriendlySummary({
+      reportData: report.data,
+      context
+    });
+    return res.json(summary);
+  } catch (error) {
+    if (error?.code === "ENOENT") {
+      return res.status(404).json({ error: "Report not found." });
+    }
+    return next(error);
+  }
+});
+
+router.post("/reports/:reportId/rm-meeting-prep", async (req, res, next) => {
+  try {
+    const report = await readParsedReport(req.params.reportId);
+    const context = typeof req.body === "object" && req.body ? req.body : {};
+    const prep = await buildAiRmMeetingPrep({
+      reportData: report.data,
+      context
+    });
+    return res.json(prep);
   } catch (error) {
     if (error?.code === "ENOENT") {
       return res.status(404).json({ error: "Report not found." });

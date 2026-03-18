@@ -3,6 +3,8 @@ import UploadCAS from "./components/UploadCAS";
 import PortfolioViewer from "./components/PortfolioViewer";
 import DashboardSummary from "./components/DashboardSummary";
 import AccountDetails from "./components/AccountDetails";
+import ClientFriendlySummary from "./components/ClientFriendlySummary";
+import RmMeetingPrep from "./components/RmMeetingPrep";
 
 function App() {
   const [activeMainTab, setActiveMainTab] = useState("upload");
@@ -156,6 +158,18 @@ function App() {
                 >
                   Account
                 </button>
+                <button
+                  className={`tab-btn ${activeTab === "client-summary" ? "active" : ""}`}
+                  onClick={() => setActiveTab("client-summary")}
+                >
+                  Client Summary
+                </button>
+                <button
+                  className={`tab-btn ${activeTab === "rm-prep" ? "active" : ""}`}
+                  onClick={() => setActiveTab("rm-prep")}
+                >
+                  RM Prep
+                </button>
               </div>
 
               {activeTab === "insights" ? (
@@ -167,6 +181,12 @@ function App() {
                   variant="full"
                 />
               ) : null}
+
+              {activeTab === "client-summary" ? (
+                <ClientFriendlySummary reportId={reportMeta?.reportId || null} />
+              ) : null}
+
+              {activeTab === "rm-prep" ? <RmMeetingPrep reportId={reportMeta?.reportId || null} /> : null}
 
               {activeTab === "holdings" ? (
                 <PortfolioViewer
