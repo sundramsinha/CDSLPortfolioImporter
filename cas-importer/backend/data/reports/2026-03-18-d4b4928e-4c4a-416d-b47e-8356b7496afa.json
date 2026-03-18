@@ -1,0 +1,850 @@
+{
+  "generatedAt": "2026-03-18T15:32:29.173Z",
+  "fileMeta": {
+    "filename": "FEB2026_AA03201912_TXN.pdf",
+    "sizeBytes": 444780
+  },
+  "summary": {
+    "totalFunds": 28,
+    "totalMutualFunds": 28,
+    "totalDematSecurities": 3,
+    "totalTransactions": 2,
+    "totalMutualFundValue": 854970.53,
+    "totalDematValue": 136396.7,
+    "totalPortfolioValue": 991367.23,
+    "allocation": {
+      "mutualFundPercentage": 86.24,
+      "dematPercentage": 13.76
+    },
+    "statementSummary": {
+      "statementAsOnDate": "28-02-2026",
+      "values": {
+        "cdslDematAccounts": null,
+        "nsdlDematAccounts": null,
+        "mutualFundFolios": 136396.7,
+        "totalPortfolioValue": 991367.23
+      },
+      "rawTokens": {
+        "cdslDematAccounts": null,
+        "nsdlDematAccounts": null,
+        "mutualFundFolios": "1,36,396.70",
+        "totalPortfolioValue": "9,91,367.23"
+      }
+    },
+    "yearlyValuation": [
+      {
+        "month": "Mar",
+        "year": 2025,
+        "monthYear": "Mar 2025",
+        "portfolioValue": 1681651.47,
+        "changeValue": null,
+        "changePercent": null
+      },
+      {
+        "month": "Apr",
+        "year": 2025,
+        "monthYear": "Apr 2025",
+        "portfolioValue": 1739350.02,
+        "changeValue": 57698.55,
+        "changePercent": 3.43
+      },
+      {
+        "month": "May",
+        "year": 2025,
+        "monthYear": "May 2025",
+        "portfolioValue": 1825849.6,
+        "changeValue": 86499.58,
+        "changePercent": 4.97
+      },
+      {
+        "month": "Jun",
+        "year": 2025,
+        "monthYear": "Jun 2025",
+        "portfolioValue": 2034213.4,
+        "changeValue": 208363.8,
+        "changePercent": 11.41
+      },
+      {
+        "month": "Jul",
+        "year": 2025,
+        "monthYear": "Jul 2025",
+        "portfolioValue": 2078878.97,
+        "changeValue": 44665.57,
+        "changePercent": 2.2
+      },
+      {
+        "month": "Aug",
+        "year": 2025,
+        "monthYear": "Aug 2025",
+        "portfolioValue": 2043241.08,
+        "changeValue": -35637.89,
+        "changePercent": -1.71
+      },
+      {
+        "month": "Sep",
+        "year": 2025,
+        "monthYear": "Sep 2025",
+        "portfolioValue": 2218989.05,
+        "changeValue": 175747.97,
+        "changePercent": 8.6
+      },
+      {
+        "month": "Oct",
+        "year": 2025,
+        "monthYear": "Oct 2025",
+        "portfolioValue": 2299906.38,
+        "changeValue": 80917.33,
+        "changePercent": 3.65
+      },
+      {
+        "month": "Nov",
+        "year": 2025,
+        "monthYear": "Nov 2025",
+        "portfolioValue": 2271378.61,
+        "changeValue": -28527.77,
+        "changePercent": -1.24
+      },
+      {
+        "month": "Dec",
+        "year": 2025,
+        "monthYear": "Dec 2025",
+        "portfolioValue": 2304463.58,
+        "changeValue": 33084.97,
+        "changePercent": 1.46
+      },
+      {
+        "month": "Jan",
+        "year": 2026,
+        "monthYear": "Jan 2026",
+        "portfolioValue": 1095943.21,
+        "changeValue": -1208520.37,
+        "changePercent": -52.44
+      },
+      {
+        "month": "Feb",
+        "year": 2026,
+        "monthYear": "Feb 2026",
+        "portfolioValue": 991367.23,
+        "changeValue": -104575.98,
+        "changePercent": -9.54
+      }
+    ],
+    "accountDetails": {
+      "primaryHolderName": "SUNDRAM SINHA",
+      "pan": "EGRPS7746J",
+      "dematAccounts": [
+        {
+          "dpName": "NU INVESTORS TECHNOLOGIES PVT LTD",
+          "dpId": "12096400",
+          "clientId": "02165628",
+          "email": "sinhasundram1993@gmail. com",
+          "mobile": "XXXXXX9130",
+          "boSubStatus": "Individual-Resident",
+          "bsda": "NO RGESS : NO Account Status : Active BO Status : INDIVIDUAL Frozen Status : Not Frozen",
+          "nominee": "MANI KUMARI",
+          "rgess": "NO",
+          "accountStatus": "Active",
+          "frozenStatus": "Not Frozen",
+          "boStatus": "INDIVIDUAL"
+        },
+        {
+          "dpName": "ZERODHA BROKING LIMITED",
+          "dpId": "12081600",
+          "clientId": "02363897",
+          "email": "sinhasundram1993@gmail. com",
+          "mobile": "XXXXXX9130",
+          "boSubStatus": "Individual- Resident Negative Nomination",
+          "bsda": "NO RGESS : NO Account Status : Active BO Status : INDIVIDUAL Frozen Status : Not Frozen",
+          "nominee": "Not Registered",
+          "rgess": "NO",
+          "accountStatus": "Active",
+          "frozenStatus": "Not Frozen",
+          "boStatus": "INDIVIDUAL"
+        }
+      ],
+      "mutualFundFolios": [
+        {
+          "amcName": "ABAKKUS MUTUAL FUND",
+          "schemeName": "Abakkus Flexi Cap Fund - Direct Growth",
+          "schemeCode": "FCDG",
+          "folioNo": "6772269045/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF2JJD01136",
+          "ucc": "",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Aditya Birla Sun Life Mutual Fund",
+          "schemeName": "Aditya Birla Sun Life ELSS Tax Saver Fund- (ELSS U/S 80C of IT ACT) - Growth-Direct Plan",
+          "schemeCode": "02GZ",
+          "folioNo": "1039149107",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF209K01UN8",
+          "ucc": "MFBRLA0047",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Axis Mutual Fund",
+          "schemeName": "Axis Liquid Fund - Direct Growth",
+          "schemeCode": "CFDG",
+          "folioNo": "910184124231/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF846K01CX4",
+          "ucc": "MFAXIS0003",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Axis Mutual Fund",
+          "schemeName": "Axis ELSS Tax Saver Fund - Direct Growth",
+          "schemeCode": "TSDG",
+          "folioNo": "91047014901/0",
+          "modeOfHolding": "Single",
+          "email": "SINHASUNDRAM1993@GMAIL.COM",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF846K01EW2",
+          "ucc": "MFAXIS0006",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Axis Mutual Fund",
+          "schemeName": "Axis Liquid Fund - Direct Growth",
+          "schemeCode": "CFDG",
+          "folioNo": "91047014901/0",
+          "modeOfHolding": "Single",
+          "email": "SINHASUNDRAM1993@GMAIL.COM",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF846K01CX4",
+          "ucc": "MFAXIS0003",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Axis Mutual Fund",
+          "schemeName": "Axis Small Cap Fund Direct Growth",
+          "schemeCode": "SCDG",
+          "folioNo": "91047014901/0",
+          "modeOfHolding": "Single",
+          "email": "SINHASUNDRAM1993@GMAIL.COM",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF846K01K35",
+          "ucc": "MFAXIS0062",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "DSP Investment Managers Pvt. Ltd",
+          "schemeName": "DSP ELSS Tax Saver Fund - Direct Plan - Growth",
+          "schemeCode": "739",
+          "folioNo": "4817887/18",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF740K01OK1",
+          "ucc": "MFDSPM0026",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Edelweiss Mutual Fund",
+          "schemeName": "Edelweiss Large & Mid Cap Fund - Direct Plan Growth",
+          "schemeCode": "EFD1",
+          "folioNo": "9108519266/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF843K01AL0",
+          "ucc": "",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "HDFC Mutual Fund",
+          "schemeName": "HDFC Large and Mid Cap Fund - Direct Growth Plan",
+          "schemeCode": "GFG1G",
+          "folioNo": "32078954/39",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF179KA1RQ7",
+          "ucc": "MFHDFC0499",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "ICICI Prudential Mutual Fund",
+          "schemeName": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth",
+          "schemeCode": "8042",
+          "folioNo": "17592824/04",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF109K016L0",
+          "ucc": "MFPRUI0089",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "ICICI Prudential Mutual Fund",
+          "schemeName": "ICICI Prudential Technology Fund - Direct Plan - Growth",
+          "schemeCode": "8019",
+          "folioNo": "17592824/04",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF109K01Z48",
+          "ucc": "MF/003/93/6/07",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "ICICI Prudential Mutual Fund",
+          "schemeName": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth",
+          "schemeCode": "8042",
+          "folioNo": "33763101/37",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF109K016L0",
+          "ucc": "MFPRUI0089",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Kotak Mutual Fund",
+          "schemeName": "Kotak Gold Fund - Direct Plan - Growth",
+          "schemeCode": "46D",
+          "folioNo": "15524821/87",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF174K01MP6",
+          "ucc": "MFKOTAK0626",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Kotak Mutual Fund",
+          "schemeName": "Kotak Midcap Fund- Direct Plan - Growth (Erstwhile Kotak Emerging Equity Scheme)",
+          "schemeCode": "123D",
+          "folioNo": "15524821/87",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF174K01LT0",
+          "ucc": "MFKOTAK0002",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Mirae Asset Mutual Fund",
+          "schemeName": "Mirae Asset Large and Midcap Fund (formerly Mirae Asset Emerging Bluechip Fund) - Direct Plan",
+          "schemeCode": "EBD1",
+          "folioNo": "77723792993/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF769K01BI1",
+          "ucc": "MFMIRA0022",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Mirae Asset Mutual Fund",
+          "schemeName": "Mirae Asset ELSS Tax Saver Fund (formerly Mirae Asset Tax Saver Fund ) - Direct Plan",
+          "schemeCode": "TSD1",
+          "folioNo": "77733673793/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF769K01DM9",
+          "ucc": "MFMIRA0032",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Mirae Asset Mutual Fund",
+          "schemeName": "Mirae Asset Large and Midcap Fund (formerly Mirae Asset Emerging Bluechip Fund) - Direct Plan",
+          "schemeCode": "EBD1",
+          "folioNo": "77733673793/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF769K01BI1",
+          "ucc": "MFMIRA0022",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Nippon India Mutual Fund",
+          "schemeName": "NIPPON INDIA ELSS TAX SAVER FUND - DIRECT PLAN GROWTH PLAN - GROWTH OPTION",
+          "schemeCode": "TSAG",
+          "folioNo": "477271161101/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF204K01L55",
+          "ucc": "MFRILC0035",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "PPFAS Mutual Fund",
+          "schemeName": "Parag Parikh Flexi Cap Fund - Direct Plan Growth",
+          "schemeCode": "001ZG",
+          "folioNo": "10097667",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF879O01027",
+          "ucc": "MFPPFA0001",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "PPFAS Mutual Fund",
+          "schemeName": "Parag Parikh ELSS Tax Saver Fund - Direct Plan",
+          "schemeCode": "TSFGZ",
+          "folioNo": "10670114",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF879O01100",
+          "ucc": "MFPPFA0005",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "PPFAS Mutual Fund",
+          "schemeName": "Parag Parikh Flexi Cap Fund - Direct Plan Growth",
+          "schemeCode": "001ZG",
+          "folioNo": "15441983",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF879O01027",
+          "ucc": "MFPPFA0001",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Quant Mutual Fund",
+          "schemeName": "quant Flexi Cap Fund - Direct Plan Growth",
+          "schemeCode": "PEDG",
+          "folioNo": "51072031916/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF966L01911",
+          "ucc": "",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Quant Mutual Fund",
+          "schemeName": "quant Flexi Cap Fund - Direct Plan Growth",
+          "schemeCode": "PEDG",
+          "folioNo": "51073829332/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF966L01911",
+          "ucc": "",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "Quant Mutual Fund",
+          "schemeName": "quant Flexi Cap Fund - Direct Plan Growth",
+          "schemeCode": "PEDG",
+          "folioNo": "51075021805/0",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF966L01911",
+          "ucc": "",
+          "rta": "KFIN"
+        },
+        {
+          "amcName": "SBI Mutual Fund",
+          "schemeName": "SBI Gold Fund - Direct Plan - Growth",
+          "schemeCode": "D246G",
+          "folioNo": "24212701",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF200K01RP8",
+          "ucc": "MFSBIM0100",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "SBI Mutual Fund",
+          "schemeName": "SBI Liquid Fund Direct Growth",
+          "schemeCode": "D72SG",
+          "folioNo": "24212701",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF200K01UT4",
+          "ucc": "MFSBIM0048",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "SBI Mutual Fund",
+          "schemeName": "SBI Small Cap Fund Direct Growth",
+          "schemeCode": "D346G",
+          "folioNo": "24212701",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF200K01T51",
+          "ucc": "MFSBIM0107",
+          "rta": "CAMS"
+        },
+        {
+          "amcName": "Unifi Asset Management Private Limited",
+          "schemeName": "Unifi Flexi Cap Fund - Direct Growth",
+          "schemeCode": "FCFDG",
+          "folioNo": "25217",
+          "modeOfHolding": "Single",
+          "email": "sinhasundram1993@gmail.com",
+          "kycStatus": "KYC OK",
+          "mobile": "XXXXXX9130",
+          "nominee": "Registered",
+          "isin": "INF1MIY01031",
+          "ucc": "",
+          "rta": "CAMS"
+        }
+      ],
+      "totals": {
+        "dematAccounts": 2,
+        "mutualFundFolios": 28
+      }
+    }
+  },
+  "mutualFundHoldings": [
+    {
+      "amc": "ABAKKUS MUTUAL FUND",
+      "scheme_name": "Abakkus Flexi Cap Fund - Direct Growth",
+      "folio_number": "6772269045/0",
+      "units": 499.975,
+      "nav": 10.045,
+      "value": 5022.25
+    },
+    {
+      "amc": "Aditya Birla Sun Life Mutual Fund",
+      "scheme_name": "Aditya Birla Sun Life ELSS Tax Saver Fund- (ELSS U/S 80C of IT ACT) - Growth-Direct Plan",
+      "folio_number": "1039149107",
+      "units": 493.229,
+      "nav": 68.27,
+      "value": 33672.74
+    },
+    {
+      "amc": "Axis Mutual Fund",
+      "scheme_name": "Axis Liquid Fund - Direct Growth",
+      "folio_number": "910184124231/0",
+      "units": 0.368,
+      "nav": 3049.4747,
+      "value": 1122.21
+    },
+    {
+      "amc": "Axis Mutual Fund",
+      "scheme_name": "Axis ELSS Tax Saver Fund - Direct Growth",
+      "folio_number": "91047014901/0",
+      "units": 254.981,
+      "nav": 108.9325,
+      "value": 27775.72
+    },
+    {
+      "amc": "Axis Mutual Fund",
+      "scheme_name": "Axis Liquid Fund - Direct Growth",
+      "folio_number": "91047014901/0",
+      "units": 16.813,
+      "nav": 3049.4747,
+      "value": 51270.82
+    },
+    {
+      "amc": "Axis Mutual Fund",
+      "scheme_name": "Axis Small Cap Fund Direct Growth",
+      "folio_number": "91047014901/0",
+      "units": 260.129,
+      "nav": 118.52,
+      "value": 30830.49
+    },
+    {
+      "amc": "Edelweiss Mutual Fund",
+      "scheme_name": "Edelweiss Large & Mid Cap Fund - Direct Plan Growth",
+      "folio_number": "9108519266/0",
+      "units": 49.028,
+      "nav": 104.422,
+      "value": 5119.6
+    },
+    {
+      "amc": "HDFC Mutual Fund",
+      "scheme_name": "HDFC Large and Mid Cap Fund - Direct Growth Plan",
+      "folio_number": "32078954/39",
+      "units": 13.54,
+      "nav": 360.058,
+      "value": 4875.19
+    },
+    {
+      "amc": "Kotak Mutual Fund",
+      "scheme_name": "Kotak Gold Fund - Direct Plan - Growth",
+      "folio_number": "15524821/87",
+      "units": 690.834,
+      "nav": 64.242,
+      "value": 44380.56
+    },
+    {
+      "amc": "Kotak Mutual Fund",
+      "scheme_name": "Kotak Midcap Fund- Direct Plan - Growth (Erstwhile Kotak Emerging Equity Scheme)",
+      "folio_number": "15524821/87",
+      "units": 160.124,
+      "nav": 159.422,
+      "value": 25527.29
+    },
+    {
+      "amc": "Mirae Asset Mutual Fund",
+      "scheme_name": "Mirae Asset Large and Midcap Fund (formerly Mirae Asset Emerging Bluechip Fund) - Direct Plan",
+      "folio_number": "77723792993/0",
+      "units": 59.528,
+      "nav": 174.058,
+      "value": 10361.32
+    },
+    {
+      "amc": "Mirae Asset Mutual Fund",
+      "scheme_name": "Mirae Asset ELSS Tax Saver Fund (formerly Mirae Asset Tax Saver Fund ) - Direct Plan",
+      "folio_number": "77733673793/0",
+      "units": 917.737,
+      "nav": 56.489,
+      "value": 51842.05
+    },
+    {
+      "amc": "Mirae Asset Mutual Fund",
+      "scheme_name": "Mirae Asset Large and Midcap Fund (formerly Mirae Asset Emerging Bluechip Fund) - Direct Plan",
+      "folio_number": "77733673793/0",
+      "units": 527.122,
+      "nav": 174.058,
+      "value": 91749.8
+    },
+    {
+      "amc": "Nippon India Mutual Fund",
+      "scheme_name": "NIPPON INDIA ELSS TAX SAVER FUND - DIRECT PLAN GROWTH PLAN - GROWTH OPTION",
+      "folio_number": "477271161101/0",
+      "units": 69.604,
+      "nav": 143.0024,
+      "value": 9953.54
+    },
+    {
+      "amc": "PPFAS Mutual Fund",
+      "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Plan Growth",
+      "folio_number": "10097667",
+      "units": 2029.377,
+      "nav": 91.9544,
+      "value": 186610.14
+    },
+    {
+      "amc": "PPFAS Mutual Fund",
+      "scheme_name": "Parag Parikh ELSS Tax Saver Fund - Direct Plan",
+      "folio_number": "10670114",
+      "units": 1524.062,
+      "nav": 32.9181,
+      "value": 50169.23
+    },
+    {
+      "amc": "PPFAS Mutual Fund",
+      "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Plan Growth",
+      "folio_number": "15441983",
+      "units": 117.058,
+      "nav": 91.9544,
+      "value": 10764
+    },
+    {
+      "amc": "Quant Mutual Fund",
+      "scheme_name": "quant Flexi Cap Fund - Direct Plan Growth",
+      "folio_number": "51072031916/0",
+      "units": 42.907,
+      "nav": 108.0572,
+      "value": 4636.41
+    },
+    {
+      "amc": "SBI Mutual Fund",
+      "scheme_name": "SBI Liquid Fund Direct Growth",
+      "folio_number": "24212701",
+      "units": 7.579,
+      "nav": 4284.4565,
+      "value": 32471.9
+    },
+    {
+      "amc": "SBI Mutual Fund",
+      "scheme_name": "SBI Small Cap Fund Direct Growth",
+      "folio_number": "24212701",
+      "units": 160.679,
+      "nav": 184.7579,
+      "value": 29686.71
+    },
+    {
+      "amc": "DSP Investment Managers Pvt. Ltd",
+      "scheme_name": "DSP ELSS Tax Saver Fund - Direct Plan - Growth",
+      "folio_number": "4817887/18",
+      "units": 62.903,
+      "nav": 159.555,
+      "value": 10036.49
+    },
+    {
+      "amc": "ICICI Prudential Mutual Fund",
+      "scheme_name": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth",
+      "folio_number": "17592824/04",
+      "units": 41.564,
+      "nav": 123.6,
+      "value": 5137.31
+    },
+    {
+      "amc": "ICICI Prudential Mutual Fund",
+      "scheme_name": "ICICI Prudential Technology Fund - Direct Plan - Growth",
+      "folio_number": "17592824/04",
+      "units": 66.636,
+      "nav": 193.49,
+      "value": 12893.4
+    },
+    {
+      "amc": "ICICI Prudential Mutual Fund",
+      "scheme_name": "ICICI Prudential Large Cap Fund (erstwhile Bluechip Fund) - Direct Plan - Growth",
+      "folio_number": "33763101/37",
+      "units": 114.256,
+      "nav": 123.6,
+      "value": 14122.04
+    },
+    {
+      "amc": "Quant Mutual Fund",
+      "scheme_name": "quant Flexi Cap Fund - Direct Plan Growth",
+      "folio_number": "51073829332/0",
+      "units": 229.552,
+      "nav": 108.0572,
+      "value": 24804.75
+    },
+    {
+      "amc": "Quant Mutual Fund",
+      "scheme_name": "quant Flexi Cap Fund - Direct Plan Growth",
+      "folio_number": "51075021805/0",
+      "units": 84.545,
+      "nav": 108.0572,
+      "value": 9135.7
+    },
+    {
+      "amc": "SBI Mutual Fund",
+      "scheme_name": "SBI Gold Fund - Direct Plan - Growth",
+      "folio_number": "24212701",
+      "units": 1257.215,
+      "nav": 48.664,
+      "value": 61181.11
+    },
+    {
+      "amc": "Unifi Asset Management Private Limited",
+      "scheme_name": "Unifi Flexi Cap Fund - Direct Growth",
+      "folio_number": "25217",
+      "units": 965.147,
+      "nav": 10.1723,
+      "value": 9817.76
+    }
+  ],
+  "dematHoldings": [
+    {
+      "isin": "INE053F01010",
+      "security_name": "INDIAN RAILWAY FINANCE CORPORATION LIMITED EQUITY SHARES",
+      "quantity": 104,
+      "free_balance": 104,
+      "market_price": 103.55,
+      "value": 10769.2
+    },
+    {
+      "isin": "INE745G01043",
+      "security_name": "MULTI COMMODITY EXCHANGE OF INDIA LIMITEDNEW EQUITY SHARES WITH FACE VALUE RS.2/-AFTER SUB- DIVISION",
+      "quantity": 50,
+      "free_balance": 50,
+      "market_price": 2444.35,
+      "value": 122217.5
+    },
+    {
+      "isin": "INE331C01025",
+      "security_name": "WELCURE DRUGS & PHARMACEUTICALS LIMITEDNEW EQUITY SHARES WITH FACE VALUE RE.1/- AFTER SUB-DIVISION",
+      "quantity": 11000,
+      "free_balance": 11000,
+      "market_price": 0.31,
+      "value": 3410
+    }
+  ],
+  "transactions": [
+    {
+      "amc": "Mirae Asset Mutual Fund",
+      "scheme_code": "TSD1",
+      "scheme_name": "Mirae Asset ELSS Tax Saver Fund (formerly Mirae Asset Tax Saver Fund ) - Direct Plan",
+      "isin": "INF769K01DM9",
+      "date": "03-02-2026",
+      "description": "Redemption",
+      "amount": -50000,
+      "nav": 57.102,
+      "price": 57.102,
+      "units": -875.635,
+      "opening_balance": 1793.372,
+      "closing_balance": 917.737,
+      "stt": 0.5
+    },
+    {
+      "amc": "PPFAS Mutual Fund",
+      "scheme_code": "001ZG",
+      "scheme_name": "Parag Parikh Flexi Cap Fund - Direct Plan Growth",
+      "isin": "INF879O01027",
+      "date": "03-02-2026",
+      "description": "*REDEMPTION - Electronic Payment-BSE - - HDFCH00781673944",
+      "amount": -50000,
+      "nav": 94.1941,
+      "price": 94.1941,
+      "units": -530.824,
+      "opening_balance": 2560.201,
+      "closing_balance": 2029.377,
+      "stt": 0.5
+    }
+  ],
+  "dematTransactions": []
+}
